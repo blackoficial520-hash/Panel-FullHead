@@ -30,8 +30,7 @@ function usePWA() {
     const android =
       window.matchMedia("(display-mode: standalone)").matches ||
       window.matchMedia("(display-mode: fullscreen)").matches;
-    const wasPWA = !!localStorage.getItem("fh_is_pwa");
-    const result = ios || android || wasPWA;
+    const result = ios || android;
     if (result) localStorage.setItem("fh_is_pwa", "true");
     return result;
   });

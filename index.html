@@ -559,8 +559,7 @@
         var isIOS        = 'standalone' in window.navigator;
         var isStandalone = (isIOS && window.navigator.standalone === true)
                         || window.matchMedia('(display-mode: standalone)').matches
-                        || window.matchMedia('(display-mode: fullscreen)').matches
-                        || localStorage.getItem('fh_is_pwa') === 'true';
+                        || window.matchMedia('(display-mode: fullscreen)').matches;
         var sessionDone  = sessionStorage.getItem('fh_session_started') === '1';
 
         if (isStandalone) localStorage.setItem('fh_is_pwa', 'true');
