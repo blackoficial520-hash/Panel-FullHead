@@ -1,0 +1,203 @@
+[
+  {
+    "brand": "Samsung",
+    "model": "A05",
+    "profile": "Geral",
+    "fingers": "2 dedos",
+    "description": "HUD estável para Android 60Hz, focado em controle e capa consistente.",
+    "steps": "• Botão de tiro: 48–55%\n• Botão de mira: 38–45%\n• Botão de agachar: médio (perto do tiro)\n• Botão de pular: médio (acima do agachar)\n• Botão de parede: grande, lado direito\n• Minimapa: topo esquerdo\n• Recarga: perto do tiro\n• Dica: mantenha o HUD simples e consistente",
+    "imageUrl": "",
+    "notes": "Recomendado para iniciantes e consistência no rush",
+    "isPremium": false
+  },
+  {
+    "brand": "Samsung",
+    "model": "A12",
+    "profile": "Geral",
+    "fingers": "2 dedos",
+    "description": "HUD equilibrado para Android 60Hz, bom para puxar capa no médio alcance.",
+    "steps": "• Botão de tiro: 50–56%\n• Botão de mira: 40–46%\n• Pular/Agachar: próximos para combo rápido\n• Parede: grande (lado direito)\n• Troca de arma: perto do polegar\n• Minimapa: topo esquerdo\n• Dica: aumente um pouco o tamanho do tiro se errar capa",
+    "imageUrl": "",
+    "notes": "Combina bem com sensi Geral do A12",
+    "isPremium": false
+  },
+  {
+    "brand": "Samsung",
+    "model": "A14",
+    "profile": "Geral",
+    "fingers": "2 dedos",
+    "description": "HUD estável para Android 60Hz, com foco em velocidade de parede e troca de arma.",
+    "steps": "• Tiro: 50–57%\n• Mira: 40–46%\n• Parede: grande (lado direito, abaixo do tiro)\n• Pular: médio (acima do agachar)\n• Agachar: médio (próximo do tiro)\n• Kit/Med: próximo do polegar\n• Dica: parede grande ajuda nas trocas rápidas",
+    "imageUrl": "",
+    "notes": "Ajuste o tiro +3% se sentir lento",
+    "isPremium": false
+  },
+  {
+    "brand": "Samsung",
+    "model": "A15",
+    "profile": "Geral",
+    "fingers": "2 dedos",
+    "description": "HUD para Android 60Hz, confortável para longas sessões sem perder precisão.",
+    "steps": "• Tiro: 50–56%\n• Mira: 40–45%\n• Pular/Agachar: alinhados (combo rápido)\n• Parede: grande\n• Granadas: acessíveis sem cobrir visão\n• Minimapa: topo esquerdo\n• Dica: mantenha espaçamento para não clicar errado",
+    "imageUrl": "",
+    "notes": "Ótimo para quem erra clique por botão muito junto",
+    "isPremium": false
+  },
+  {
+    "brand": "Samsung",
+    "model": "A23",
+    "profile": "Geral",
+    "fingers": "2 dedos",
+    "description": "HUD intermediário, focado em capa e controle de recuo.",
+    "steps": "• Tiro: 50–55%\n• Mira: 40–46%\n• Parede: grande\n• Pular: médio\n• Agachar: médio\n• Troca de arma: perto do tiro\n• Dica: deixe recarga perto para evitar travar em troca",
+    "imageUrl": "",
+    "notes": "Boa base para evoluir depois para 3 dedos",
+    "isPremium": false
+  },
+  {
+    "brand": "Samsung",
+    "model": "A32",
+    "profile": "Geral",
+    "fingers": "2 dedos",
+    "description": "HUD para tela mais responsiva (90Hz), com foco em movimentação rápida.",
+    "steps": "• Tiro: 48–54%\n• Mira: 38–44%\n• Pular: médio\n• Agachar: médio (bem próximo)\n• Parede: grande\n• Dica: 90Hz permite HUD um pouco mais compacto",
+    "imageUrl": "",
+    "notes": "Se ficar rápido demais, reduza mira 2–3%",
+    "isPremium": false
+  },
+  {
+    "brand": "Samsung",
+    "model": "A52",
+    "profile": "Geral",
+    "fingers": "2 dedos",
+    "description": "HUD 90Hz mais solto, bom para rush e subida de capa.",
+    "steps": "• Tiro: 48–53%\n• Mira: 38–43%\n• Parede: grande\n• Pular/Agachar: próximos\n• Troca: perto do polegar\n• Dica: 90Hz aceita clique mais leve e rápido",
+    "imageUrl": "",
+    "notes": "Ótimo para agressivo no rush",
+    "isPremium": false
+  },
+
+  {
+    "brand": "Xiaomi",
+    "model": "Redmi Note 11",
+    "profile": "Geral",
+    "fingers": "2 dedos",
+    "description": "HUD Android 60Hz padrão Redmi, confortável e consistente.",
+    "steps": "• Tiro: 50–56%\n• Mira: 40–45%\n• Parede: grande\n• Pular: médio\n• Agachar: médio\n• Dica: deixe espaço para o polegar deslizar",
+    "imageUrl": "",
+    "notes": "Base sólida para a maioria dos players",
+    "isPremium": false
+  },
+  {
+    "brand": "Xiaomi",
+    "model": "Redmi Note 12",
+    "profile": "Geral",
+    "fingers": "2 dedos",
+    "description": "HUD 90Hz, melhor para movimentação e capa mais rápida.",
+    "steps": "• Tiro: 48–54%\n• Mira: 38–44%\n• Parede: grande\n• Pular/Agachar: próximos\n• Dica: 90Hz permite diminuir um pouco os botões",
+    "imageUrl": "",
+    "notes": "Se clicar errado, aumente o tiro 2–3%",
+    "isPremium": false
+  },
+  {
+    "brand": "Xiaomi",
+    "model": "Redmi Note 13",
+    "profile": "Geral",
+    "fingers": "2 dedos",
+    "description": "HUD 120Hz, focado em reflexo e execução rápida.",
+    "steps": "• Tiro: 46–52%\n• Mira: 36–42%\n• Parede: grande\n• Pular/Agachar: compactos\n• Dica: em 120Hz você pode deixar HUD mais “leve”",
+    "imageUrl": "",
+    "notes": "HUD rápido para quem joga agressivo",
+    "isPremium": false
+  },
+  {
+    "brand": "Xiaomi",
+    "model": "Poco X3",
+    "profile": "Geral",
+    "fingers": "2 dedos",
+    "description": "HUD 120Hz com foco em capa e parede rápida.",
+    "steps": "• Tiro: 46–52%\n• Mira: 36–42%\n• Parede: grande (abaixo do tiro)\n• Pular/Agachar: próximos\n• Dica: deixe a parede muito acessível",
+    "imageUrl": "",
+    "notes": "Parede grande = mais sobrevivência no rush",
+    "isPremium": false
+  },
+  {
+    "brand": "Xiaomi",
+    "model": "Poco X5",
+    "profile": "Geral",
+    "fingers": "2 dedos",
+    "description": "HUD 120Hz bem responsivo, bom para troca de arma e capa rápida.",
+    "steps": "• Tiro: 46–51%\n• Mira: 36–41%\n• Parede: grande\n• Troca: perto do polegar\n• Dica: deixe o botão de troca “na mão”",
+    "imageUrl": "",
+    "notes": "Se você erra troca, aumente o botão de arma",
+    "isPremium": false
+  },
+
+  {
+    "brand": "Motorola",
+    "model": "Moto G54",
+    "profile": "Geral",
+    "fingers": "2 dedos",
+    "description": "HUD 120Hz equilibrado para movimentação e precisão.",
+    "steps": "• Tiro: 47–52%\n• Mira: 37–42%\n• Parede: grande\n• Pular/Agachar: próximos\n• Dica: ajuste o tamanho do tiro conforme seu polegar",
+    "imageUrl": "",
+    "notes": "Muito bom para quem joga ranqueada",
+    "isPremium": false
+  },
+  {
+    "brand": "Motorola",
+    "model": "Moto G84",
+    "profile": "Geral",
+    "fingers": "2 dedos",
+    "description": "HUD 120Hz rápido e limpo, ideal para rush.",
+    "steps": "• Tiro: 46–51%\n• Mira: 36–41%\n• Parede: grande\n• Pular/Agachar: compactos\n• Dica: deixe HUD mais “curto” para velocidade",
+    "imageUrl": "",
+    "notes": "Perfeito pra agressivo",
+    "isPremium": false
+  },
+
+  {
+    "brand": "Apple",
+    "model": "iPhone XR",
+    "profile": "Geral",
+    "fingers": "2 dedos",
+    "description": "HUD iOS estável para consistência e precisão.",
+    "steps": "• Tiro: 48–54%\n• Mira: 38–44%\n• Parede: grande\n• Pular: médio\n• Agachar: médio\n• Dica: iOS responde bem com botões médios",
+    "imageUrl": "",
+    "notes": "Evite botões pequenos demais no iOS",
+    "isPremium": false
+  },
+  {
+    "brand": "Apple",
+    "model": "iPhone 11",
+    "profile": "Geral",
+    "fingers": "2 dedos",
+    "description": "HUD iOS equilibrado para ranqueada e rush moderado.",
+    "steps": "• Tiro: 48–54%\n• Mira: 38–44%\n• Parede: grande\n• Pular/Agachar: próximos\n• Dica: mantenha consistência de posição",
+    "imageUrl": "",
+    "notes": "Muito bom para pegar capa sem travar",
+    "isPremium": false
+  },
+  {
+    "brand": "Apple",
+    "model": "iPhone 12",
+    "profile": "Geral",
+    "fingers": "2 dedos",
+    "description": "HUD iOS com leve foco em velocidade.",
+    "steps": "• Tiro: 47–53%\n• Mira: 37–43%\n• Parede: grande\n• Pular/Agachar: compactos\n• Dica: não deixe botões colados pra evitar erro",
+    "imageUrl": "",
+    "notes": "Se clicar errado, aumente o espaçamento",
+    "isPremium": false
+  },
+  {
+    "brand": "Apple",
+    "model": "iPhone 13",
+    "profile": "Geral",
+    "fingers": "2 dedos",
+    "description": "HUD iOS mais solto, bom para quem joga agressivo.",
+    "steps": "• Tiro: 46–52%\n• Mira: 36–42%\n• Parede: grande\n• Pular/Agachar: compactos\n• Dica: mantenha o polegar leve e rápido",
+    "imageUrl": "",
+    "notes": "Ótimo para rush e movimentação",
+    "isPremium": false
+  }
+]

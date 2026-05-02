@@ -1,0 +1,588 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+
+.app{
+  background:#07080c;
+  border-radius:20px;
+  overflow:hidden;
+  font-family:'Inter',sans-serif;
+  border:1px solid #1c2030;
+  position:relative;
+}
+
+.screen{display:none;}
+.screen.active{display:flex;flex-direction:column;}
+
+/* NAV TABS */
+.nav-tabs{
+  display:flex;
+  gap:0;
+  background:#040507;
+  border-bottom:1px solid #12151e;
+  padding:0 16px;
+}
+.nav-tab{
+  padding:10px 16px;
+  font-size:10px;font-weight:600;letter-spacing:2px;
+  color:#2a3050;cursor:pointer;border-bottom:2px solid transparent;
+  transition:all 0.2s;text-transform:uppercase;
+}
+.nav-tab.active{color:#d4aa00;border-bottom-color:#d4aa00;}
+.nav-tab:hover{color:#6a7090;}
+
+/* ==================== LOGIN ==================== */
+.login-screen{
+  min-height:680px;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  overflow:hidden;
+}
+.login-bg-glow{
+  position:absolute;top:-100px;left:50%;transform:translateX(-50%);
+  width:500px;height:300px;
+  background:radial-gradient(ellipse at center top,rgba(212,170,0,0.08) 0%,transparent 65%);
+  pointer-events:none;
+}
+.login-grid{
+  position:absolute;inset:0;pointer-events:none;overflow:hidden;
+}
+.lg-line{position:absolute;background:#d4aa00;opacity:0.04;}
+.login-card{
+  width:320px;
+  background:#0c0e18;
+  border:1px solid #1c2232;
+  border-radius:20px;
+  padding:30px 26px;
+  position:relative;z-index:2;
+}
+.lc-corner{position:absolute;width:14px;height:14px;border-color:#d4aa00;border-style:solid;opacity:0.5;}
+.lc-tl{top:-1px;left:-1px;border-width:2px 0 0 2px;border-radius:3px 0 0 0;}
+.lc-tr{top:-1px;right:-1px;border-width:2px 2px 0 0;border-radius:0 3px 0 0;}
+.lc-bl{bottom:-1px;left:-1px;border-width:0 0 2px 2px;border-radius:0 0 0 3px;}
+.lc-br{bottom:-1px;right:-1px;border-width:0 2px 2px 0;border-radius:0 0 3px 0;}
+.logo-area{display:flex;flex-direction:column;align-items:center;margin-bottom:22px;}
+.logo-ring{
+  width:74px;height:74px;border-radius:50%;
+  background:#080a10;border:1px solid #1c2232;
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:14px;overflow:hidden;
+}
+.logo-ring img{width:62px;height:62px;object-fit:contain;}
+.brand-name{
+  font-family:'Barlow Condensed','Inter',sans-serif;
+  font-size:24px;font-weight:700;letter-spacing:6px;color:#e8ddb0;line-height:1;margin-bottom:4px;
+}
+.brand-sub{font-size:9px;letter-spacing:5px;color:#4a5578;font-weight:500;}
+.field-divider{
+  display:flex;align-items:center;gap:10px;margin-bottom:20px;
+}
+.fd-line{flex:1;height:1px;background:#12151e;}
+.fd-text{font-size:9px;font-weight:600;letter-spacing:3px;color:#d4aa00;opacity:0.6;}
+.field{margin-bottom:13px;}
+.field-label{font-size:9px;font-weight:600;letter-spacing:2px;color:#6070a0;text-transform:uppercase;display:block;margin-bottom:6px;}
+.field-input{
+  width:100%;background:#080a10;border:1px solid #1a1e2e;border-radius:10px;
+  padding:11px 14px;font-size:13px;color:#a0b0d0;font-family:'Inter',sans-serif;outline:none;
+}
+.field-input::placeholder{color:#2a3050;}
+.field-wrap{position:relative;}
+.field-eye{position:absolute;right:12px;top:50%;transform:translateY(-50%);}
+.field-eye svg{width:14px;height:14px;stroke:#3a4570;}
+.btn-login{
+  width:100%;padding:13px;border-radius:10px;border:none;
+  background:#d4aa00;color:#07080c;
+  font-family:'Barlow Condensed','Inter',sans-serif;
+  font-size:14px;font-weight:700;letter-spacing:4px;cursor:pointer;
+  margin-top:6px;margin-bottom:16px;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+}
+.login-links{display:flex;flex-direction:column;align-items:center;gap:10px;}
+.login-link{font-size:12px;color:#4a5578;cursor:pointer;}
+.login-link span{color:#d4aa00;opacity:0.8;}
+.link-sep-row{display:flex;align-items:center;gap:8px;width:100%;}
+.lsr-line{flex:1;height:1px;background:#0f1120;}
+.lsr-o{font-size:10px;color:#2a3050;letter-spacing:1px;}
+.login-copy{
+  position:absolute;bottom:14px;font-size:9px;letter-spacing:2px;color:#1e2235;z-index:2;
+}
+
+/* ==================== DASHBOARD ==================== */
+.dash-screen{min-height:720px;}
+.dash-topbar{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 18px;border-bottom:1px solid #10131c;background:#09090f;
+}
+.dash-logo{display:flex;align-items:center;gap:10px;}
+.dash-logo-img{width:34px;height:34px;border-radius:50%;overflow:hidden;background:#080a10;border:1px solid #1c2232;display:flex;align-items:center;justify-content:center;}
+.dash-logo-img img{width:28px;height:28px;object-fit:contain;}
+.dash-brand{font-family:'Barlow Condensed','Inter',sans-serif;font-size:16px;font-weight:700;letter-spacing:3px;color:#e8ddb0;}
+.dash-brand-sub{font-size:8px;letter-spacing:4px;color:#3a4060;margin-top:1px;}
+.dash-right{display:flex;align-items:center;gap:10px;}
+.status-pill{
+  display:flex;align-items:center;gap:5px;padding:4px 10px;border-radius:20px;
+  border:1px solid #1a2038;background:#0d1018;font-size:9px;font-weight:600;color:#3a4060;letter-spacing:1px;
+}
+.s-dot{width:5px;height:5px;border-radius:50%;background:#22d87a;}
+.user-chip{
+  display:flex;align-items:center;gap:7px;padding:4px 12px 4px 4px;
+  border-radius:20px;border:1px solid #1a2038;background:#0d1018;cursor:pointer;
+}
+.u-avatar{width:22px;height:22px;border-radius:50%;background:#d4aa00;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#080a0e;}
+.u-name{font-size:11px;color:#6070a0;font-weight:500;}
+.dash-body{display:flex;flex:1;}
+.dash-sidebar{
+  width:50px;border-right:1px solid #10131c;
+  display:flex;flex-direction:column;align-items:center;padding:14px 0;gap:4px;
+}
+.si{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative;}
+.si.active{background:#0f1508;}
+.si.active::before{content:'';position:absolute;left:0;top:8px;bottom:8px;width:2px;background:#d4aa00;border-radius:0 2px 2px 0;}
+.si svg{width:15px;height:15px;}
+.si.active svg{stroke:#d4aa00;}
+.si:not(.active) svg{stroke:#2a3050;}
+.si.prem svg{stroke:#6d4aff !important;}
+.si-sep{width:18px;height:1px;background:#10131c;margin:3px 0;}
+.dash-content{flex:1;padding:20px 18px;display:flex;flex-direction:column;gap:18px;overflow-y:auto;}
+.hero-block{
+  padding:18px 20px;border-radius:16px;
+  background:#0c0e18;border:1px solid #16192a;position:relative;overflow:hidden;
+}
+.hero-corner-art{position:absolute;top:0;right:0;width:110px;height:110px;pointer-events:none;}
+.hero-tag{font-size:9px;font-weight:600;letter-spacing:4px;color:#d4aa00;opacity:0.7;text-transform:uppercase;margin-bottom:8px;}
+.hero-title{
+  font-family:'Barlow Condensed','Inter',sans-serif;
+  font-size:28px;font-weight:700;letter-spacing:2px;color:#e8ddb0;line-height:1;margin-bottom:5px;
+}
+.hero-title span{color:#d4aa00;}
+.hero-sub{font-size:12px;color:#4a5578;margin-bottom:14px;}
+.hero-stats{display:flex;gap:14px;}
+.hs{display:flex;flex-direction:column;gap:2px;}
+.hs-val{font-family:'Barlow Condensed','Inter',sans-serif;font-size:18px;font-weight:700;color:#d4aa00;letter-spacing:1px;line-height:1;}
+.hs-lbl{font-size:9px;color:#3a4060;letter-spacing:2px;text-transform:uppercase;}
+.hs-sep{width:1px;background:#16192a;align-self:stretch;}
+.section-lbl{font-size:9px;font-weight:600;letter-spacing:4px;color:#2a3050;text-transform:uppercase;display:flex;align-items:center;gap:10px;}
+.section-lbl::after{content:'';flex:1;height:1px;background:#10131c;}
+.mods-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.mod-card{
+  background:#0c0e18;border:1px solid #16192a;border-radius:13px;
+  padding:14px;position:relative;overflow:hidden;cursor:pointer;
+}
+.mc-accent{position:absolute;top:0;left:0;right:0;height:2px;border-radius:13px 13px 0 0;}
+.mc-num{position:absolute;top:10px;right:12px;font-family:'Barlow Condensed','Inter',sans-serif;font-size:28px;font-weight:700;color:#fff;opacity:0.03;letter-spacing:1px;}
+.mc-badge{position:absolute;top:10px;right:12px;font-size:8px;font-weight:700;letter-spacing:1px;padding:2px 7px;border-radius:3px;}
+.mb-new{background:rgba(16,185,129,0.12);color:#22c97a;border:1px solid rgba(16,185,129,0.2);}
+.mb-pro{background:rgba(212,170,0,0.1);color:#d4aa00;border:1px solid rgba(212,170,0,0.2);}
+.mc-icon{width:32px;height:32px;border-radius:9px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;}
+.mc-icon svg{width:15px;height:15px;}
+.mc-title{font-family:'Barlow Condensed','Inter',sans-serif;font-size:14px;font-weight:700;letter-spacing:1.5px;color:#c8d4f0;text-transform:uppercase;line-height:1.2;margin-bottom:5px;}
+.mc-desc{font-size:11px;color:#4a5578;line-height:1.4;margin-bottom:13px;}
+.mc-btn{
+  width:100%;padding:7px 10px;border-radius:7px;
+  font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+  cursor:pointer;border:none;display:flex;align-items:center;justify-content:space-between;
+  font-family:'Inter',sans-serif;
+}
+.prem-card{
+  grid-column:1/-1;background:#0a0c18;border:1px solid rgba(109,74,255,0.2);
+  border-radius:13px;padding:18px;display:flex;align-items:center;justify-content:space-between;
+  position:relative;overflow:hidden;cursor:pointer;
+}
+.prem-glow{position:absolute;left:-40px;top:-40px;width:140px;height:140px;border-radius:50%;background:radial-gradient(circle,rgba(109,74,255,0.07) 0%,transparent 70%);pointer-events:none;}
+.prem-chip{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:4px;background:rgba(109,74,255,0.1);border:1px solid rgba(109,74,255,0.2);width:fit-content;margin-bottom:6px;}
+.pc-dot{width:4px;height:4px;border-radius:50%;background:#7c3aed;}
+.pc-text{font-size:8px;font-weight:700;letter-spacing:3px;color:#8b5cf6;}
+.prem-title{font-family:'Barlow Condensed','Inter',sans-serif;font-size:16px;font-weight:700;letter-spacing:2px;color:#b8c4e8;text-transform:uppercase;}
+.prem-desc{font-size:11px;color:#4a5578;margin-top:3px;}
+.prem-btn{padding:9px 18px;border-radius:8px;background:rgba(109,74,255,0.07);border:1px solid rgba(109,74,255,0.15);font-size:10px;font-weight:700;letter-spacing:2px;color:#4a3090;cursor:not-allowed;white-space:nowrap;display:flex;align-items:center;gap:7px;font-family:'Inter',sans-serif;}
+.dash-tip{
+  padding:10px 14px;border-radius:10px;background:#0c0e18;border:1px solid #10131c;
+  display:flex;align-items:center;gap:10px;
+}
+.dt-line{width:2px;height:26px;background:#d4aa00;opacity:0.25;border-radius:2px;flex-shrink:0;}
+.dt-text{font-size:11px;color:#4a5578;line-height:1.5;}
+.dt-text strong{color:#6a78a8;font-weight:600;}
+
+/* ==================== SENSIBILIDAD ==================== */
+.sensi-screen{min-height:720px;}
+.sensi-header{
+  display:flex;align-items:center;gap:12px;padding:14px 18px;
+  border-bottom:1px solid #10131c;background:#09090f;
+}
+.back-btn{
+  width:32px;height:32px;border-radius:8px;background:#0c0e18;border:1px solid #1a1e2e;
+  display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;
+}
+.back-btn svg{width:14px;height:14px;stroke:#6070a0;}
+.sh-info{}
+.sh-title{font-family:'Barlow Condensed','Inter',sans-serif;font-size:17px;font-weight:700;letter-spacing:2px;color:#c8d4f0;text-transform:uppercase;line-height:1;margin-bottom:2px;}
+.sh-sub{font-size:10px;color:#4a5578;}
+.sh-badge{margin-left:auto;font-size:8px;font-weight:700;letter-spacing:2px;padding:3px 10px;border-radius:4px;background:rgba(59,130,246,0.1);color:#4a8fff;border:1px solid rgba(59,130,246,0.2);white-space:nowrap;}
+.sensi-body{padding:16px;display:flex;flex-direction:column;gap:14px;}
+.method-bar{
+  padding:12px 15px;border-radius:12px;background:#0c0e18;
+  border:1px solid #1c2030;border-left:3px solid #d4aa00;
+  display:flex;align-items:flex-start;gap:10px;
+}
+.mb-ico{width:24px;height:24px;border-radius:6px;background:rgba(212,170,0,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+.mb-ico svg{width:12px;height:12px;stroke:#d4aa00;}
+.mb-t{font-size:11px;font-weight:700;color:#d4aa00;margin-bottom:3px;letter-spacing:0.5px;}
+.mb-d{font-size:11px;color:#5a6890;line-height:1.5;}
+.filters{display:flex;gap:8px;align-items:center;}
+.ft{padding:7px 13px;border-radius:8px;font-size:11px;font-weight:600;cursor:pointer;border:1px solid #12151e;background:#0c0e18;color:#4a5578;}
+.ft.active{background:rgba(212,170,0,0.08);border-color:rgba(212,170,0,0.2);color:#d4aa00;}
+.search-wrap{
+  flex:1;background:#0c0e18;border:1px solid #12151e;border-radius:8px;
+  padding:7px 12px;display:flex;align-items:center;gap:8px;
+}
+.search-wrap svg{width:12px;height:12px;stroke:#3a4060;flex-shrink:0;}
+.search-wrap span{font-size:12px;color:#3a4060;}
+.count-row{display:flex;align-items:center;gap:8px;}
+.pop-chip{
+  display:flex;align-items:center;gap:5px;padding:5px 11px;border-radius:7px;
+  background:#0c0e18;border:1px solid #12151e;font-size:10px;font-weight:600;color:#4a5578;cursor:pointer;
+}
+.pop-dot{width:5px;height:5px;border-radius:50%;background:#f97316;}
+.cnt-text{font-size:10px;color:#3a4060;letter-spacing:1px;}
+.cards-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.dc{background:#0c0e18;border:1px solid #16192a;border-radius:13px;padding:13px;position:relative;overflow:hidden;}
+.dc-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:9px;}
+.dc-name{font-size:13px;font-weight:600;color:#b0bcd8;line-height:1.2;}
+.dc-dpi-block{text-align:right;}
+.dc-dpi-lbl{font-size:8px;letter-spacing:2px;color:#3a4060;font-weight:600;display:block;margin-bottom:1px;}
+.dc-dpi-val{font-family:'Barlow Condensed','Inter',sans-serif;font-size:20px;font-weight:700;color:#d4aa00;letter-spacing:1px;line-height:1;}
+.dc-tags{display:flex;gap:5px;margin-bottom:11px;flex-wrap:wrap;}
+.dc-tag{font-size:8px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:2px 7px;border-radius:4px;}
+.t-hz{background:#0d1020;color:#4a5578;border:1px solid #12151e;}
+.t-free{background:rgba(16,185,129,0.08);color:#22c97a;border:1px solid rgba(16,185,129,0.15);}
+.t-prem{background:rgba(212,170,0,0.08);color:#d4aa00;border:1px solid rgba(212,170,0,0.15);}
+.dc-rows{display:flex;flex-direction:column;gap:6px;margin-bottom:11px;}
+.dc-row-lbl-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;}
+.dc-rlbl{font-size:9px;font-weight:600;letter-spacing:1px;color:#4a5578;}
+.dc-rval{font-size:11px;font-weight:600;color:#7a8aaa;}
+.dc-bar{height:3px;border-radius:2px;background:#0d1020;overflow:hidden;}
+.dc-fill{height:100%;border-radius:2px;}
+.f-gold{background:#d4aa00;}
+.f-red{background:#e55;}
+.f-blue{background:#3b82f6;}
+.f-ylw{background:#f59e0b;}
+.f-cyn{background:#06b6d4;}
+.dc-note{font-size:9px;color:#4a5578;border-top:1px solid #0d1018;padding-top:8px;margin-bottom:9px;line-height:1.4;display:flex;align-items:flex-start;gap:5px;}
+.dc-note svg{width:9px;height:9px;stroke:#3a4060;flex-shrink:0;margin-top:1px;}
+.dc-btn{
+  width:100%;padding:9px;border-radius:8px;
+  background:rgba(212,170,0,0.08);border:1px solid rgba(212,170,0,0.18);
+  color:#d4aa00;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;font-family:'Inter',sans-serif;
+}
+.dc-btn svg{width:11px;height:11px;stroke:#d4aa00;}
+.dc-btn.locked{background:rgba(212,170,0,0.03);border-color:#0d1020;color:#2a3050;cursor:not-allowed;}
+.dc-btn.locked svg{stroke:#2a3050;}
+.dc-prem-glow{position:absolute;top:0;right:0;width:60px;height:60px;background:radial-gradient(circle at top right,rgba(212,170,0,0.04) 0%,transparent 70%);pointer-events:none;}
+</style>
+
+<div class="app">
+  <div class="nav-tabs">
+    <div class="nav-tab active" onclick="showScreen('login')">Login</div>
+    <div class="nav-tab" onclick="showScreen('dash')">Dashboard</div>
+    <div class="nav-tab" onclick="showScreen('sensi')">Sensibilidad</div>
+  </div>
+
+  <!-- LOGIN -->
+  <div class="screen login-screen active" id="screen-login">
+    <div class="login-bg-glow"></div>
+    <div class="login-grid">
+      <div class="lg-line" style="height:1px;top:28%;left:0;right:0;position:absolute;background:#d4aa00;opacity:0.04;"></div>
+      <div class="lg-line" style="height:1px;top:72%;left:0;right:0;position:absolute;background:#d4aa00;opacity:0.04;"></div>
+      <div class="lg-line" style="width:1px;left:18%;top:0;bottom:0;position:absolute;background:#d4aa00;opacity:0.04;"></div>
+      <div class="lg-line" style="width:1px;left:82%;top:0;bottom:0;position:absolute;background:#d4aa00;opacity:0.04;"></div>
+    </div>
+    <div class="login-card">
+      <div class="lc-corner lc-tl"></div>
+      <div class="lc-corner lc-tr"></div>
+      <div class="lc-corner lc-bl"></div>
+      <div class="lc-corner lc-br"></div>
+      <div class="logo-area">
+        <div class="logo-ring">
+          <img src="/mnt/user-data/uploads/logo.png" alt="FullHead" onerror="this.style.display='none'"/>
+        </div>
+        <div class="brand-name">FULLHEAD</div>
+        <div class="brand-sub">PANEL · FREE FIRE</div>
+      </div>
+      <div class="field-divider">
+        <div class="fd-line"></div>
+        <div class="fd-text">ACCEDE A TU CUENTA</div>
+        <div class="fd-line"></div>
+      </div>
+      <div class="field">
+        <label class="field-label">Correo electrónico</label>
+        <input class="field-input" type="email" placeholder="tu@correo.com"/>
+      </div>
+      <div class="field">
+        <label class="field-label">Contraseña</label>
+        <div class="field-wrap">
+          <input class="field-input" type="password" placeholder="Ingresa tu contraseña" style="padding-right:40px"/>
+          <div class="field-eye"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div>
+        </div>
+      </div>
+      <button class="btn-login">› &nbsp; INGRESAR</button>
+      <div class="login-links">
+        <div class="login-link">¿Olvidaste tu contraseña?</div>
+        <div class="link-sep-row"><div class="lsr-line"></div><div class="lsr-o">O</div><div class="lsr-line"></div></div>
+        <div class="login-link">¿No tienes cuenta? <span>Regístrate</span></div>
+      </div>
+    </div>
+    <div class="login-copy">© 2025 FULLHEAD · TODOS LOS DERECHOS RESERVADOS</div>
+  </div>
+
+  <!-- DASHBOARD -->
+  <div class="screen dash-screen" id="screen-dash">
+    <div class="dash-topbar">
+      <div class="dash-logo">
+        <div class="dash-logo-img"><img src="/mnt/user-data/uploads/logo.png" alt="FH" onerror="this.style.display='none'"/></div>
+        <div><div class="dash-brand">FULLHEAD</div><div class="dash-brand-sub">PANEL · FREE FIRE</div></div>
+      </div>
+      <div class="dash-right">
+        <div class="status-pill"><div class="s-dot"></div> EN LÍNEA</div>
+        <div class="user-chip"><div class="u-avatar">P</div><div class="u-name">pegalc2007</div></div>
+      </div>
+    </div>
+    <div class="dash-body">
+      <div class="dash-sidebar">
+        <div class="si active"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div>
+        <div class="si"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div>
+        <div class="si"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><line x1="4.93" y1="4.93" x2="9.17" y2="9.17"/><line x1="14.83" y1="14.83" x2="19.07" y2="19.07"/><line x1="14.83" y1="9.17" x2="19.07" y2="4.93"/><line x1="4.93" y1="19.07" x2="9.17" y2="14.83"/></svg></div>
+        <div class="si-sep"></div>
+        <div class="si"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+        <div class="si"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+        <div class="si"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+        <div class="si-sep"></div>
+        <div class="si prem"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+      </div>
+      <div class="dash-content">
+        <div class="hero-block">
+          <svg class="hero-corner-art" viewBox="0 0 110 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <line x1="110" y1="0" x2="50" y2="0" stroke="#d4aa00" stroke-width="0.5" opacity="0.18"/>
+            <line x1="110" y1="0" x2="110" y2="60" stroke="#d4aa00" stroke-width="0.5" opacity="0.18"/>
+            <line x1="110" y1="20" x2="80" y2="0" stroke="#d4aa00" stroke-width="0.3" opacity="0.1"/>
+            <line x1="110" y1="40" x2="100" y2="0" stroke="#d4aa00" stroke-width="0.3" opacity="0.1"/>
+            <circle cx="110" cy="0" r="45" stroke="#d4aa00" stroke-width="0.4" opacity="0.06" fill="none"/>
+            <circle cx="110" cy="0" r="75" stroke="#d4aa00" stroke-width="0.3" opacity="0.04" fill="none"/>
+          </svg>
+          <div class="hero-tag">MÓDULOS DISPONIBLES</div>
+          <div class="hero-title">PANEL <span>FULLHEAD</span></div>
+          <div class="hero-sub">Selecciona un módulo para optimizar tu rendimiento al máximo</div>
+          <div class="hero-stats">
+            <div class="hs"><div class="hs-val">6</div><div class="hs-lbl">Módulos</div></div>
+            <div class="hs-sep"></div>
+            <div class="hs"><div class="hs-val">7D</div><div class="hs-lbl">Actualización</div></div>
+            <div class="hs-sep"></div>
+            <div class="hs"><div class="hs-val">VIP</div><div class="hs-lbl">Sensibilidad</div></div>
+          </div>
+        </div>
+        <div class="section-lbl">Módulos</div>
+        <div class="mods-grid">
+
+          <div class="mod-card">
+            <div class="mc-accent" style="background:#d4aa00;"></div>
+            <div class="mc-num">01</div>
+            <div class="mc-icon" style="background:rgba(212,170,0,0.1);border:1px solid rgba(212,170,0,0.15);">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#d4aa00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            </div>
+            <div class="mc-title">Instalación<br>del Panel</div>
+            <div class="mc-desc">Guía paso a paso para instalar en Android e iOS.</div>
+            <button class="mc-btn" style="background:rgba(212,170,0,0.08);color:#d4aa00;border:1px solid rgba(212,170,0,0.18);">Acceder <span>›</span></button>
+          </div>
+
+          <div class="mod-card">
+            <div class="mc-accent" style="background:#3b82f6;"></div>
+            <div class="mc-badge mb-new">NUEVO</div>
+            <div class="mc-icon" style="background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.15);">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><line x1="4.93" y1="4.93" x2="9.17" y2="9.17"/><line x1="14.83" y1="14.83" x2="19.07" y2="19.07"/><line x1="14.83" y1="9.17" x2="19.07" y2="4.93"/><line x1="4.93" y1="19.07" x2="9.17" y2="14.83"/></svg>
+            </div>
+            <div class="mc-title">Sensibilidad<br>por Celular</div>
+            <div class="mc-desc">Presets VIP por modelo de dispositivo.</div>
+            <button class="mc-btn" style="background:rgba(59,130,246,0.08);color:#4a8fff;border:1px solid rgba(59,130,246,0.18);">Acceder <span>›</span></button>
+          </div>
+
+          <div class="mod-card">
+            <div class="mc-accent" style="background:#f97316;"></div>
+            <div class="mc-badge mb-pro">PRO</div>
+            <div class="mc-icon" style="background:rgba(249,115,22,0.1);border:1px solid rgba(249,115,22,0.15);">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            </div>
+            <div class="mc-title">HUD Pro</div>
+            <div class="mc-desc">Interfaces recomendadas para mejor visibilidad.</div>
+            <button class="mc-btn" style="background:rgba(249,115,22,0.08);color:#f97316;border:1px solid rgba(249,115,22,0.18);">Acceder <span>›</span></button>
+          </div>
+
+          <div class="mod-card">
+            <div class="mc-accent" style="background:#06b6d4;"></div>
+            <div class="mc-badge mb-pro">PRO</div>
+            <div class="mc-icon" style="background:rgba(6,182,212,0.1);border:1px solid rgba(6,182,212,0.15);">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+            </div>
+            <div class="mc-title">Configuraciones<br>Pro</div>
+            <div class="mc-desc">Ajustes avanzados para optimizar tu juego.</div>
+            <button class="mc-btn" style="background:rgba(6,182,212,0.08);color:#06b6d4;border:1px solid rgba(6,182,212,0.18);">Acceder <span>›</span></button>
+          </div>
+
+          <div class="mod-card">
+            <div class="mc-accent" style="background:#10b981;"></div>
+            <div class="mc-icon" style="background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.15);">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <div class="mc-title">Entrenamientos<br>Diarios</div>
+            <div class="mc-desc">Rutinas rápidas para mejorar tu destreza.</div>
+            <button class="mc-btn" style="background:rgba(16,185,129,0.08);color:#22c97a;border:1px solid rgba(16,185,129,0.18);">Acceder <span>›</span></button>
+          </div>
+
+          <div class="mod-card">
+            <div class="mc-accent" style="background:#d4aa00;"></div>
+            <div class="mc-icon" style="background:rgba(212,170,0,0.1);border:1px solid rgba(212,170,0,0.15);">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#d4aa00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            </div>
+            <div class="mc-title">Panel<br>Externo</div>
+            <div class="mc-desc">Funciones avanzadas y optimizaciones extras.</div>
+            <button class="mc-btn" style="background:rgba(212,170,0,0.08);color:#d4aa00;border:1px solid rgba(212,170,0,0.18);">Acceder <span>›</span></button>
+          </div>
+
+          <div class="prem-card">
+            <div class="prem-glow"></div>
+            <div>
+              <div class="prem-chip"><div class="pc-dot"></div><div class="pc-text">PREMIUM</div></div>
+              <div class="prem-title">Área Premium</div>
+              <div class="prem-desc">Contenido exclusivo VIP — próximamente disponible.</div>
+            </div>
+            <div class="prem-btn">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#4a3090" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              Próximamente
+            </div>
+          </div>
+        </div>
+        <div class="dash-tip">
+          <div class="dt-line"></div>
+          <div class="dt-text"><strong>Consejo Pro:</strong> Todos los ajustes se sincronizan automáticamente en tu cuenta. Accede desde cualquier dispositivo.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SENSIBILIDAD -->
+  <div class="screen sensi-screen" id="screen-sensi">
+    <div class="sensi-header">
+      <div class="back-btn"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></div>
+      <div class="sh-info">
+        <div class="sh-title">Sensibilidad por Celular</div>
+        <div class="sh-sub">Presets calibrados por DPI — copia y aplica</div>
+      </div>
+      <div class="sh-badge">76 modelos</div>
+    </div>
+    <div class="sensi-body">
+      <div class="method-bar">
+        <div class="mb-ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+        <div>
+          <div class="mb-t">Método FullHead</div>
+          <div class="mb-d">Valores calibrados por el DPI real de cada celular. Busca tu modelo, copia y aplica directo en Free Fire.</div>
+        </div>
+      </div>
+      <div class="filters">
+        <div class="ft active">Todos</div>
+        <div class="ft">Apple</div>
+        <div class="ft">Samsung</div>
+        <div class="search-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <span>Buscar modelo...</span>
+        </div>
+      </div>
+      <div class="count-row">
+        <div class="pop-chip"><div class="pop-dot"></div> Solo populares</div>
+        <div class="cnt-text">76 MODELOS DISPONIBLES</div>
+      </div>
+      <div class="cards-grid">
+
+        <div class="dc">
+          <div class="dc-top">
+            <div class="dc-name">Apple iPhone 13</div>
+            <div class="dc-dpi-block"><span class="dc-dpi-lbl">DPI</span><div class="dc-dpi-val">460</div></div>
+          </div>
+          <div class="dc-tags"><span class="dc-tag t-hz">60HZ · BASE</span><span class="dc-tag t-free">FREE</span></div>
+          <div class="dc-rows">
+            <div><div class="dc-row-lbl-top"><span class="dc-rlbl">GENERAL</span><span class="dc-rval">158</span></div><div class="dc-bar"><div class="dc-fill f-gold" style="width:82%"></div></div></div>
+            <div><div class="dc-row-lbl-top"><span class="dc-rlbl">RED DOT</span><span class="dc-rval">143</span></div><div class="dc-bar"><div class="dc-fill f-red" style="width:74%"></div></div></div>
+            <div><div class="dc-row-lbl-top"><span class="dc-rlbl">MIRA 2X</span><span class="dc-rval">128</span></div><div class="dc-bar"><div class="dc-fill f-blue" style="width:66%"></div></div></div>
+            <div><div class="dc-row-lbl-top"><span class="dc-rlbl">MIRA 4X</span><span class="dc-rval">113</span></div><div class="dc-bar"><div class="dc-fill f-ylw" style="width:58%"></div></div></div>
+            <div><div class="dc-row-lbl-top"><span class="dc-rlbl">AWM</span><span class="dc-rval">98</span></div><div class="dc-bar"><div class="dc-fill f-cyn" style="width:50%"></div></div></div>
+          </div>
+          <div class="dc-note"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> iOS 60Hz — chip A15, muy preciso</div>
+          <button class="dc-btn"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copiar sensi</button>
+        </div>
+
+        <div class="dc">
+          <div class="dc-prem-glow"></div>
+          <div class="dc-top">
+            <div class="dc-name">Apple iPhone 15</div>
+            <div class="dc-dpi-block"><span class="dc-dpi-lbl">DPI</span><div class="dc-dpi-val" style="color:#6a5a30">460</div></div>
+          </div>
+          <div class="dc-tags"><span class="dc-tag t-hz">60HZ · BASE</span><span class="dc-tag t-prem">PREMIUM</span></div>
+          <div class="dc-rows">
+            <div><div class="dc-row-lbl-top"><span class="dc-rlbl">GENERAL</span><span class="dc-rval" style="color:#2e3a50">148</span></div><div class="dc-bar"><div class="dc-fill f-gold" style="width:76%;opacity:0.2"></div></div></div>
+            <div><div class="dc-row-lbl-top"><span class="dc-rlbl">RED DOT</span><span class="dc-rval" style="color:#2e3a50">133</span></div><div class="dc-bar"><div class="dc-fill f-red" style="width:69%;opacity:0.2"></div></div></div>
+            <div><div class="dc-row-lbl-top"><span class="dc-rlbl">MIRA 2X</span><span class="dc-rval" style="color:#2e3a50">118</span></div><div class="dc-bar"><div class="dc-fill f-blue" style="width:60%;opacity:0.2"></div></div></div>
+            <div><div class="dc-row-lbl-top"><span class="dc-rlbl">MIRA 4X</span><span class="dc-rval" style="color:#2e3a50">103</span></div><div class="dc-bar"><div class="dc-fill f-ylw" style="width:53%;opacity:0.2"></div></div></div>
+            <div><div class="dc-row-lbl-top"><span class="dc-rlbl">AWM</span><span class="dc-rval" style="color:#2e3a50">88</span></div><div class="dc-bar"><div class="dc-fill f-cyn" style="width:45%;opacity:0.2"></div></div></div>
+          </div>
+          <div class="dc-note"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> iOS — chip A16, respuesta élite</div>
+          <button class="dc-btn locked"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Premium</button>
+        </div>
+
+        <div class="dc">
+          <div class="dc-top">
+            <div class="dc-name">Apple iPhone 11</div>
+            <div class="dc-dpi-block"><span class="dc-dpi-lbl">DPI</span><div class="dc-dpi-val">326</div></div>
+          </div>
+          <div class="dc-tags"><span class="dc-tag t-hz">60HZ · BASE</span><span class="dc-tag t-free">FREE</span></div>
+          <div class="dc-rows">
+            <div><div class="dc-row-lbl-top"><span class="dc-rlbl">GENERAL</span><span class="dc-rval">168</span></div><div class="dc-bar"><div class="dc-fill f-gold" style="width:87%"></div></div></div>
+            <div><div class="dc-row-lbl-top"><span class="dc-rlbl">RED DOT</span><span class="dc-rval">153</span></div><div class="dc-bar"><div class="dc-fill f-red" style="width:79%"></div></div></div>
+            <div><div class="dc-row-lbl-top"><span class="dc-rlbl">MIRA 2X</span><span class="dc-rval">138</span></div><div class="dc-bar"><div class="dc-fill f-blue" style="width:71%"></div></div></div>
+            <div><div class="dc-row-lbl-top"><span class="dc-rlbl">MIRA 4X</span><span class="dc-rval">123</span></div><div class="dc-bar"><div class="dc-fill f-ylw" style="width:63%"></div></div></div>
+            <div><div class="dc-row-lbl-top"><span class="dc-rlbl">AWM</span><span class="dc-rval">108</span></div><div class="dc-bar"><div class="dc-fill f-cyn" style="width:55%"></div></div></div>
+          </div>
+          <div class="dc-note"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> iOS 60Hz — equilibrio total</div>
+          <button class="dc-btn"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copiar sensi</button>
+        </div>
+
+        <div class="dc">
+          <div class="dc-top">
+            <div class="dc-name">Infinix Hot 30</div>
+            <div class="dc-dpi-block"><span class="dc-dpi-lbl">DPI</span><div class="dc-dpi-val">289</div></div>
+          </div>
+          <div class="dc-tags"><span class="dc-tag t-hz">90HZ · MED</span><span class="dc-tag t-free">FREE</span></div>
+          <div class="dc-rows">
+            <div><div class="dc-row-lbl-top"><span class="dc-rlbl">GENERAL</span><span class="dc-rval">182</span></div><div class="dc-bar"><div class="dc-fill f-gold" style="width:94%"></div></div></div>
+            <div><div class="dc-row-lbl-top"><span class="dc-rlbl">RED DOT</span><span class="dc-rval">167</span></div><div class="dc-bar"><div class="dc-fill f-red" style="width:86%"></div></div></div>
+            <div><div class="dc-row-lbl-top"><span class="dc-rlbl">MIRA 2X</span><span class="dc-rval">152</span></div><div class="dc-bar"><div class="dc-fill f-blue" style="width:78%"></div></div></div>
+            <div><div class="dc-row-lbl-top"><span class="dc-rlbl">MIRA 4X</span><span class="dc-rval">137</span></div><div class="dc-bar"><div class="dc-fill f-ylw" style="width:70%"></div></div></div>
+            <div><div class="dc-row-lbl-top"><span class="dc-rlbl">AWM</span><span class="dc-rval">122</span></div><div class="dc-bar"><div class="dc-fill f-cyn" style="width:63%"></div></div></div>
+          </div>
+          <div class="dc-note"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Android 90Hz — compensación de DPI bajo</div>
+          <button class="dc-btn"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copiar sensi</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('screen-'+id).classList.add('active');
+  const tabs={login:0,dash:1,sensi:2};
+  document.querySelectorAll('.nav-tab')[tabs[id]].classList.add('active');
+}
+</script>

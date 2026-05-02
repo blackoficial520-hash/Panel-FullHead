@@ -1,0 +1,23 @@
+[
+  { "brand":"Samsung","model":"A05","profile":"Geral","general":95,"redDot":90,"x2":85,"x4":75,"awm":35,"freeLook":70,"dpi":520,"notes":"Android 60Hz – configuração estável","isPremium":false },
+  { "brand":"Samsung","model":"A12","profile":"Geral","general":95,"redDot":90,"x2":85,"x4":75,"awm":35,"freeLook":70,"dpi":520,"notes":"Android 60Hz – configuração estável","isPremium":false },
+  { "brand":"Samsung","model":"A14","profile":"Geral","general":96,"redDot":91,"x2":86,"x4":76,"awm":36,"freeLook":71,"dpi":530,"notes":"Android 60Hz – boa resposta de toque","isPremium":false },
+  { "brand":"Samsung","model":"A15","profile":"Geral","general":96,"redDot":91,"x2":86,"x4":76,"awm":36,"freeLook":71,"dpi":540,"notes":"Android 60Hz – touch equilibrado","isPremium":false },
+  { "brand":"Samsung","model":"A23","profile":"Geral","general":97,"redDot":92,"x2":87,"x4":77,"awm":37,"freeLook":72,"dpi":550,"notes":"Android 60Hz – desempenho intermediário","isPremium":false },
+  { "brand":"Samsung","model":"A32","profile":"Geral","general":97,"redDot":92,"x2":87,"x4":77,"awm":37,"freeLook":72,"dpi":550,"notes":"Android 90Hz – resposta mais rápida","isPremium":false },
+  { "brand":"Samsung","model":"A52","profile":"Geral","general":98,"redDot":93,"x2":88,"x4":78,"awm":38,"freeLook":74,"dpi":570,"notes":"Android 90Hz – sensi mais solta","isPremium":false },
+
+  { "brand":"Xiaomi","model":"Redmi Note 11","profile":"Geral","general":96,"redDot":91,"x2":86,"x4":76,"awm":36,"freeLook":71,"dpi":540,"notes":"Android 60Hz – padrão Redmi","isPremium":false },
+  { "brand":"Xiaomi","model":"Redmi Note 12","profile":"Geral","general":97,"redDot":92,"x2":87,"x4":77,"awm":37,"freeLook":72,"dpi":560,"notes":"Android 90Hz – bom controle de capa","isPremium":false },
+  { "brand":"Xiaomi","model":"Redmi Note 13","profile":"Geral","general":98,"redDot":93,"x2":88,"x4":78,"awm":38,"freeLook":74,"dpi":580,"notes":"Android 120Hz – sensi rápida","isPremium":false },
+  { "brand":"Xiaomi","model":"Poco X3","profile":"Geral","general":98,"redDot":94,"x2":88,"x4":78,"awm":38,"freeLook":75,"dpi":590,"notes":"Android 120Hz – foco em capa","isPremium":false },
+  { "brand":"Xiaomi","model":"Poco X5","profile":"Geral","general":99,"redDot":95,"x2":89,"x4":79,"awm":39,"freeLook":76,"dpi":600,"notes":"Android 120Hz – alta precisão","isPremium":false },
+
+  { "brand":"Motorola","model":"Moto G54","profile":"Geral","general":97,"redDot":92,"x2":87,"x4":77,"awm":37,"freeLook":73,"dpi":560,"notes":"Android 120Hz – sensi equilibrada","isPremium":false },
+  { "brand":"Motorola","model":"Moto G84","profile":"Geral","general":98,"redDot":93,"x2":88,"x4":78,"awm":38,"freeLook":75,"dpi":580,"notes":"Android 120Hz – resposta rápida","isPremium":false },
+
+  { "brand":"Apple","model":"iPhone XR","profile":"Geral","general":91,"redDot":86,"x2":81,"x4":71,"awm":30,"freeLook":67,"dpi":0,"notes":"iOS – sensi estável","isPremium":false },
+  { "brand":"Apple","model":"iPhone 11","profile":"Geral","general":92,"redDot":87,"x2":82,"x4":72,"awm":30,"freeLook":68,"dpi":0,"notes":"iOS – equilíbrio total","isPremium":false },
+  { "brand":"Apple","model":"iPhone 12","profile":"Geral","general":93,"redDot":88,"x2":83,"x4":73,"awm":31,"freeLook":69,"dpi":0,"notes":"iOS – resposta rápida","isPremium":false },
+  { "brand":"Apple","model":"iPhone 13","profile":"Geral","general":94,"redDot":89,"x2":84,"x4":74,"awm":32,"freeLook":70,"dpi":0,"notes":"iOS – sensi mais solta","isPremium":false }
+]

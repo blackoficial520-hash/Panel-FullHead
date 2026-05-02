@@ -1,0 +1,50 @@
+[
+  {
+    "title": "Treino de Capa Rápido",
+    "category": "Capa",
+    "duration": "5 minutos",
+    "level": "Iniciante",
+    "description": "Treino rápido para melhorar subida de capa.",
+    "steps": "• Entre no modo treino\n• Use apenas armas de tiro único\n• Mire no peito e arraste levemente\n• 20 abates sem pressa",
+    "frequency": "Diário",
+    "videoUrl": "",
+    "notes": "Não force o arrasto",
+    "isPremium": false
+  },
+  {
+    "title": "Treino de Mira Média",
+    "category": "Mira",
+    "duration": "7 minutos",
+    "level": "Intermediário",
+    "description": "Melhora precisão no médio alcance.",
+    "steps": "• Use AR ou SMG\n• Mire sempre na cabeça\n• Controle o recuo\n• 30 eliminações",
+    "frequency": "Diário",
+    "videoUrl": "",
+    "notes": "Foque na constância",
+    "isPremium": false
+  },
+  {
+    "title": "Treino AWM",
+    "category": "AWM",
+    "duration": "5 minutos",
+    "level": "Intermediário",
+    "description": "Treino de precisão com sniper.",
+    "steps": "• Use AWM ou Kar98\n• Mire rápido e atire\n• Não fique parado\n• 15 abates",
+    "frequency": "Antes da ranked",
+    "videoUrl": "",
+    "notes": "Velocidade > força",
+    "isPremium": false
+  },
+  {
+    "title": "Movimentação e Rush",
+    "category": "Movimentação",
+    "duration": "10 minutos",
+    "level": "Avançado",
+    "description": "Treino para rush e troca rápida.",
+    "steps": "• Use pular + agachar\n• Faça parede sempre\n• Troca rápida de arma\n• Simule x1",
+    "frequency": "Diário",
+    "videoUrl": "",
+    "notes": "Treine com calma primeiro",
+    "isPremium": false
+  }
+]
