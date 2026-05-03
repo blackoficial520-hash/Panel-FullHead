@@ -11,31 +11,19 @@
   "categories": ["games", "productivity"],
   "icons": [
     {
-      "src": "/favicon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
-      "purpose": "any"
-    },
-    {
-      "src": "/favicon.png",
-      "sizes": "1080x1080",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "/favicon.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "/favicon.png",
+      "src": "/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/favicon.png",
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
@@ -59,8 +47,8 @@
       "url": "/",
       "icons": [
         {
-          "src": "/favicon.png",
-          "sizes": "1080x1080",
+          "src": "/icon-192.png",
+          "sizes": "192x192",
           "type": "image/png"
         }
       ]
@@ -72,8 +60,8 @@
       "url": "/sensi",
       "icons": [
         {
-          "src": "/favicon.png",
-          "sizes": "1080x1080",
+          "src": "/icon-192.png",
+          "sizes": "192x192",
           "type": "image/png"
         }
       ]
