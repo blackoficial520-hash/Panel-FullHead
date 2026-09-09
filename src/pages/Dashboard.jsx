@@ -65,7 +65,7 @@ const modules = [
     ),
   },
   {
-    title: "Panel Externo",
+    title: "Bono - Beta",
     desc: "Funciones avanzadas y optimizaciones extras.",
     route: "/painel-externo",
     accent: "#D4AA00",
