@@ -198,7 +198,7 @@ export default function AppLayout({ children }) {
           </div>
           <div style={{ minWidth: 0, flex: 1 }}>
             <div style={{ fontSize: "12px", fontWeight: 600, color: "#6070A0", letterSpacing: "0.3px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{userName}</div>
-            <div style={{ fontSize: "9px", color: "#3A4060", letterSpacing: "1.5px", textTransform: "uppercase", marginTop: "1px" }}>Free</div>
+            <div style={{ fontSize: "9px", color: "#3A4060", letterSpacing: "1.5px", textTransform: "uppercase", marginTop: "1px" }}>ACTIVO</div>
           </div>
         </div>
         <button
