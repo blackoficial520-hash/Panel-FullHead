@@ -2,15 +2,15 @@ import { Link } from "react-router-dom";
 
 const modules = [
   {
-    title: "Instalación del Panel",
-    desc: "Guía paso a paso para instalar en Android e iOS.",
+    title: "Cómo Usar el Panel",
+    desc: "Guía rápida de todos los módulos de FullHead.",
     route: "/instalacion",
     accent: "#D4AA00",
     badge: null,
     num: "01",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="#D4AA00" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>
+        <circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
       </svg>
     ),
   },

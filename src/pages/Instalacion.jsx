@@ -1,162 +1,100 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const iphoneSteps = [
+const guideSteps = [
   {
     num: "01",
-    title: "Abre Safari",
-    desc: "El panel solo se puede instalar desde el navegador Safari. Si estás usando Chrome u otro navegador, cópialo y ábrelo en Safari.",
+    title: "Sensibilidad por Celular",
+    desc: "Es el corazón del sistema. Busca tu marca y modelo en el buscador, o filtra por marca en el menú desplegable. Cada tarjeta muestra los valores calibrados (General, Red Dot, Mira 2x, Mira 4x, AWM y Mirada Libre) según el DPI real de tu pantalla.",
     icon: (
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-        <circle cx="12" cy="12" r="10"/>
-        <line x1="2" y1="12" x2="22" y2="12"/>
-        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+        <circle cx="11" cy="11" r="7"/>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"/>
       </svg>
     ),
-    tip: "Asegúrate de estar usando la URL correcta del panel antes de continuar.",
+    tip: "Toca \"COPIAR SENSI\" en la tarjeta de tu celular, abre Free Fire → Configuración → Sensibilidad y pega cada valor en su casilla correspondiente.",
   },
   {
     num: "02",
-    title: "Toca el botón Compartir",
-    desc: "En la barra inferior de Safari, busca el ícono de compartir — es el cuadrado con una flecha apuntando hacia arriba. Tócalo.",
+    title: "HUD Pro",
+    desc: "Aquí encuentras el tamaño y la posición ideal de cada botón (disparo, mira, agachar, saltar, pared gloo) para tu modelo exacto. Usa el filtro \"2 Dedos\" o \"3 Dedos\" según cómo juegas.",
     icon: (
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-        <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/>
-        <polyline points="16 6 12 2 8 6"/>
-        <line x1="12" y1="2" x2="12" y2="15"/>
+        <rect x="2" y="6" width="20" height="12" rx="3"/>
+        <circle cx="8" cy="12" r="1.6" fill="currentColor" stroke="none"/>
+        <circle cx="16" cy="10" r="1.2" fill="currentColor" stroke="none"/>
+        <circle cx="18" cy="14" r="1.2" fill="currentColor" stroke="none"/>
       </svg>
     ),
-    tip: "Si no ves la barra de navegación, desliza hacia arriba en la pantalla para que aparezca.",
+    tip: "Si tu celular aguanta \"3 Dedos\", pruébalo en modo entrenamiento primero — libera el pulgar derecho para disparar y mirar al mismo tiempo.",
   },
   {
     num: "03",
-    title: "Selecciona \"Agregar a inicio\"",
-    desc: "En el menú que aparece, desplázate hacia abajo y busca la opción \"Agregar a pantalla de inicio\". Tócala para continuar.",
+    title: "Configuraciones Pro",
+    desc: "Ajustes de gráficos, FPS, sombra y filtros optimizados para tu hardware — más el tamaño ideal de los botones de disparo y mira en porcentaje de pantalla. Todo calibrado para que tu celular no trabe en partidas largas.",
     icon: (
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-        <rect x="3" y="3" width="18" height="18" rx="2"/>
-        <line x1="12" y1="8" x2="12" y2="16"/>
-        <line x1="8" y1="12" x2="16" y2="12"/>
+        <line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/>
+        <line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/>
+        <circle cx="4" cy="12" r="2"/><circle cx="12" cy="10" r="2"/><circle cx="20" cy="14" r="2"/>
       </svg>
     ),
-    tip: "La opción puede estar en la segunda o tercera fila del menú de compartir.",
+    tip: "Toca \"COPIAR CONFIG\" y aplica cada ajuste en Free Fire → Configuración → Gráficos, en el mismo orden que aparece en la tarjeta.",
   },
   {
     num: "04",
-    title: "Confirma el nombre",
-    desc: "Aparecerá una pantalla de confirmación con el nombre \"Panel FullHead\". Puedes editarlo o dejarlo así. Toca \"Agregar\" en la esquina superior derecha.",
+    title: "Entrenamientos Diarios",
+    desc: "Rutinas cortas organizadas por categoría — Headshot, Arrastre, Capa, Crouch-Shot, AWM, Rush, Memoria Muscular y más — para mejorar tu puntería y reflejos con la práctica diaria, no solo con la configuración.",
     icon: (
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-        <path d="M20 6L9 17l-5-5"/>
+        <circle cx="12" cy="13" r="8"/>
+        <polyline points="12 9 12 13 15 15"/>
+        <line x1="9" y1="2" x2="15" y2="2"/>
       </svg>
     ),
-    tip: "Si cambias el nombre, aún podrás acceder al panel normalmente.",
+    tip: "10 a 15 minutos por día en modo entrenamiento rinden más que una hora sin rutina. Elige una categoría a la vez.",
   },
   {
     num: "05",
-    title: "¡Listo! Abre desde el inicio",
-    desc: "El ícono del panel aparecerá en tu pantalla de inicio como una app. Ábrelo y tendrás acceso completo sin barras de navegador.",
+    title: "Perfiles Geral y Pro",
+    desc: "Cada celular tiene un perfil \"Geral\" (equilibrado, para el día a día) y algunos también un perfil \"Pro\" (más cerrado, para quien ya domina la sensibilidad base). El badge de color (60Hz BASE, 90Hz MED, 120Hz PRO, 144Hz ELITE) te muestra la gama de tu pantalla de un vistazo.",
     icon: (
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+        <circle cx="12" cy="8" r="4"/>
+        <path d="M4 21v-1a8 8 0 0 1 16 0v1"/>
       </svg>
     ),
-    tip: "El panel funciona como una app nativa: pantalla completa, sin barras del navegador.",
-  },
-];
-
-const androidSteps = [
-  {
-    num: "01",
-    title: "Abre Chrome",
-    desc: "Usa Google Chrome para instalar el panel. Es el navegador recomendado en Android para mejor compatibilidad con la instalación.",
-    icon: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-        <circle cx="12" cy="12" r="10"/>
-        <circle cx="12" cy="12" r="4"/>
-        <line x1="21.17" y1="8" x2="12" y2="8"/>
-        <line x1="3.95" y1="6.06" x2="8.54" y2="14"/>
-        <line x1="10.88" y1="21.94" x2="15.46" y2="14"/>
-      </svg>
-    ),
-    tip: "También puedes usar Samsung Internet o Edge — el proceso es muy similar.",
-  },
-  {
-    num: "02",
-    title: "Toca el menú ⋮",
-    desc: "Busca los tres puntos verticales (⋮) en la esquina superior derecha del navegador. Tócalos para abrir el menú de opciones.",
-    icon: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-        <circle cx="12" cy="5" r="1.5" fill="currentColor"/>
-        <circle cx="12" cy="12" r="1.5" fill="currentColor"/>
-        <circle cx="12" cy="19" r="1.5" fill="currentColor"/>
-      </svg>
-    ),
-    tip: "Si aparece una notificación automática \"Agregar a inicio\", puedes usarla directamente.",
-  },
-  {
-    num: "03",
-    title: "Selecciona \"Agregar a pantalla de inicio\"",
-    desc: "En el menú desplegable, busca la opción \"Agregar a pantalla de inicio\" o \"Instalar app\". Tócala.",
-    icon: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-        <rect x="5" y="2" width="14" height="20" rx="2"/>
-        <line x1="12" y1="18" x2="12.01" y2="18" strokeWidth="3"/>
-      </svg>
-    ),
-    tip: "En versiones recientes de Chrome, también puede aparecer como \"Instalar Panel FullHead\".",
-  },
-  {
-    num: "04",
-    title: "Confirma la instalación",
-    desc: "Aparecerá un diálogo de confirmación. Toca \"Agregar\" o \"Instalar\" para añadir el panel a tu pantalla de inicio.",
-    icon: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-        <polyline points="7 10 12 15 17 10"/>
-        <line x1="12" y1="15" x2="12" y2="3"/>
-      </svg>
-    ),
-    tip: "Puedes elegir si instalarlo como un acceso directo o como una app PWA completa.",
-  },
-  {
-    num: "05",
-    title: "¡Instalado! Accede como app",
-    desc: "El ícono de Panel FullHead aparece en tu cajón de aplicaciones o pantalla de inicio. Ábrelo para una experiencia de pantalla completa.",
-    icon: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-      </svg>
-    ),
-    tip: "Las actualizaciones se aplican automáticamente cuando hay conexión a internet.",
+    tip: "Activa \"🔥 Solo Populares\" en la Sensibilidad para ver primero los modelos más usados por la comunidad LATAM.",
   },
 ];
 
 const faq = [
   {
-    q: "¿El panel funciona sin internet?",
-    a: "Algunas funciones básicas están disponibles sin conexión gracias al caché del navegador. Sin embargo, para cargar presets, HUDs y configuraciones necesitas conexión a internet.",
+    q: "¿No encuentro mi modelo exacto?",
+    a: "Seguimos agregando aparelhos cada semana según lo que la comunidad reporta. Mientras tanto, busca el modelo más cercano de tu misma marca y gama (mismo Hz y tamaño de pantalla) — el resultado será muy similar.",
+  },
+  {
+    q: "¿Cuál es la diferencia entre perfil \"Geral\" y \"Pro\"?",
+    a: "\"Geral\" es el punto de partida recomendado para la mayoría de los jugadores. \"Pro\" reduce un poco más la sensibilidad general para quien ya tiene consistencia y busca máxima precisión — pruébalo solo después de unos días usando el perfil Geral.",
+  },
+  {
+    q: "¿Cómo aplico los valores en el juego?",
+    a: "Copia los valores con el botón correspondiente (COPIAR SENSI, COPIAR CONFIG), abre Free Fire y pégalos manualmente en Configuración → Sensibilidad o → Gráficos, según el módulo. El juego no permite importar configuraciones automáticamente.",
   },
   {
     q: "¿Mis datos se sincronizan entre dispositivos?",
-    a: "Sí. Tu cuenta está vinculada a tu email. Inicia sesión desde cualquier dispositivo y tendrás acceso a todos tus ajustes sincronizados.",
+    a: "Sí. Tu cuenta está vinculada a tu email. Inicia sesión desde cualquier dispositivo y tendrás acceso a los mismos módulos y ajustes.",
   },
   {
-    q: "¿Ocupa mucho espacio en el celular?",
-    a: "No. Al ser una Progressive Web App (PWA), ocupa muy poco espacio comparado con una app nativa — menos de 5 MB en la mayoría de los casos.",
-  },
-  {
-    q: "¿Puedo instalarlo en más de un dispositivo?",
-    a: "Sí. Puedes instalar el panel en todos tus dispositivos. Solo necesitas iniciar sesión con la misma cuenta.",
+    q: "¿El panel funciona sin internet?",
+    a: "Necesitas conexión para cargar los presets, HUDs, configuraciones y entrenamientos la primera vez. Una vez cargados en la sesión, la navegación entre pantallas es instantánea.",
   },
 ];
 
 export default function Instalacion() {
   const navigate = useNavigate();
-  const [tab, setTab] = useState("iphone");
   const [openFaq, setOpenFaq] = useState(null);
-
-  const steps = tab === "iphone" ? iphoneSteps : androidSteps;
 
   return (
     <div className="module-page" style={{ overflowY: "auto" }}>
@@ -169,8 +107,8 @@ export default function Instalacion() {
           </svg>
         </button>
         <div>
-          <div className="module-title">Instalación del Panel</div>
-          <div className="module-subtitle">Guía paso a paso para iPhone y Android</div>
+          <div className="module-title">Cómo Usar el Panel</div>
+          <div className="module-subtitle">Guía rápida de todos los módulos de FullHead</div>
         </div>
       </div>
 
@@ -195,17 +133,17 @@ export default function Instalacion() {
             fontSize: "22px", letterSpacing: "3px",
             color: "var(--gold)", marginBottom: "8px",
           }}>
-            ¿Qué es una PWA?
+            Bienvenido a tu Sistema de Calibración
           </div>
           <p style={{ fontSize: "13px", color: "var(--text)", lineHeight: 1.7, maxWidth: "680px" }}>
-            Panel FullHead es una <strong style={{ color: "var(--gold)" }}>Progressive Web App (PWA)</strong> — una aplicación web que funciona como una app nativa en tu celular. No necesitas descargarla desde la App Store ni Play Store. Solo instálala desde el navegador y listo: pantalla completa, sin barras del navegador, acceso directo desde el inicio.
+            FullHead no es un hack ni un mod — es una <strong style={{ color: "var(--gold)" }}>base de datos de calibración</strong> construida a partir de las características reales de cada celular (densidad de pantalla, tasa de actualización y hardware). Cuatro módulos, un mismo objetivo: que encuentres tu configuración exacta en segundos y la apliques tú mismo, directo en el juego.
           </p>
           <div style={{ display: "flex", flexWrap: "wrap", gap: "10px", marginTop: "14px" }}>
             {[
-              { icon: "⚡", text: "Sin descarga de tiendas" },
-              { icon: "🔄", text: "Actualizaciones automáticas" },
-              { icon: "📱", text: "iPhone y Android" },
-              { icon: "💾", text: "Menos de 5 MB" },
+              { icon: "🎯", text: "Sensibilidad por celular" },
+              { icon: "🎮", text: "HUD por modelo" },
+              { icon: "⚙️", text: "Gráficos optimizados" },
+              { icon: "🏆", text: "Entrenamientos diarios" },
             ].map((b) => (
               <div key={b.text} style={{
                 display: "flex", alignItems: "center", gap: "6px",
@@ -223,84 +161,14 @@ export default function Instalacion() {
           </div>
         </div>
 
-        {/* Tab selector */}
-        <div style={{ display: "flex", gap: "10px", marginBottom: "24px" }}>
-          {[
-            {
-              id: "iphone",
-              label: "iPhone / iOS",
-              icon: (
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <rect x="5" y="2" width="14" height="20" rx="2"/>
-                  <line x1="12" y1="18" x2="12.01" y2="18" strokeWidth="3"/>
-                </svg>
-              ),
-            },
-            {
-              id: "android",
-              label: "Android",
-              icon: (
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <rect x="5" y="2" width="14" height="20" rx="2"/>
-                  <line x1="12" y1="18" x2="12.01" y2="18" strokeWidth="3"/>
-                  <line x1="9" y1="1" x2="9" y2="3"/>
-                  <line x1="15" y1="1" x2="15" y2="3"/>
-                </svg>
-              ),
-            },
-          ].map((t) => (
-            <button
-              key={t.id}
-              onClick={() => setTab(t.id)}
-              style={{
-                display: "flex", alignItems: "center", gap: "8px",
-                padding: "10px 20px",
-                borderRadius: "8px",
-                border: "1px solid",
-                borderColor: tab === t.id ? "var(--border-gold)" : "var(--border)",
-                background: tab === t.id ? "rgba(212,160,23,0.1)" : "var(--surface2)",
-                color: tab === t.id ? "var(--gold)" : "var(--text-muted)",
-                fontFamily: "'Barlow Condensed', sans-serif",
-                fontSize: "14px", fontWeight: 700,
-                letterSpacing: "1px",
-                cursor: "pointer",
-                transition: "all 0.2s",
-              }}
-            >
-              {t.icon}
-              {t.label}
-            </button>
-          ))}
-        </div>
-
-        {/* Platform note */}
-        <div style={{
-          display: "flex", alignItems: "center", gap: "10px",
-          padding: "10px 16px",
-          background: "rgba(26,111,168,0.08)",
-          border: "1px solid rgba(26,111,168,0.3)",
-          borderRadius: "8px",
-          marginBottom: "24px",
-          fontSize: "12px", color: "var(--text-muted)",
-        }}>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1A6FA8" strokeWidth="2">
-            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
-          </svg>
-          <span>
-            {tab === "iphone"
-              ? "Para iPhone usa siempre Safari. Otros navegadores en iOS no permiten instalar la app."
-              : "Para Android se recomienda Google Chrome. También funciona con Samsung Internet o Microsoft Edge."}
-          </span>
-        </div>
-
         {/* Steps */}
         <div className="section-header-fh">
-          <div className="section-label-fh">■&nbsp; Pasos de instalación — {tab === "iphone" ? "iPhone" : "Android"}</div>
+          <div className="section-label-fh">■&nbsp; Los 5 módulos del panel</div>
           <div className="section-line-fh"/>
         </div>
 
         <div style={{ display: "flex", flexDirection: "column", gap: "14px", marginBottom: "40px" }}>
-          {steps.map((step, idx) => (
+          {guideSteps.map((step, idx) => (
             <div
               key={step.num}
               className="data-card"
@@ -322,7 +190,7 @@ export default function Instalacion() {
                   }}>
                     {step.num}
                   </div>
-                  {idx < steps.length - 1 && (
+                  {idx < guideSteps.length - 1 && (
                     <div style={{ width: "1px", height: "24px", background: "var(--border)" }} />
                   )}
                 </div>
@@ -401,10 +269,10 @@ export default function Instalacion() {
           </div>
           <div>
             <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: "15px", fontWeight: 700, color: "#1E8C4A", marginBottom: "4px" }}>
-              ¡Ya tienes el panel instalado!
+              ¡Ya conoces todo el sistema!
             </div>
             <div style={{ fontSize: "12px", color: "var(--text-muted)", lineHeight: 1.6 }}>
-              Ahora puedes acceder a todos los módulos: sensibilidades, HUD, configuraciones, entrenamientos y más. Todo sincronizado en tu cuenta.
+              Empieza por Sensibilidad y HUD — son los dos módulos que más rápido notarás en tu partida. Ajusta de a poco: 2 a 3 puntos por vez, nunca todo de golpe.
             </div>
           </div>
         </div>
