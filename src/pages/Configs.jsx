@@ -135,11 +135,6 @@ function ConfigCard({ c, onCopy }) {
           </div>
           <div style={{ display: "flex", gap: "6px", flexWrap: "wrap", alignItems: "center" }}>
             <GamaBadge notes={c.notes} />
-            {c.isPremium ? (
-              <span className="badge-premium">Premium</span>
-            ) : (
-              <span className="badge-free">Free</span>
-            )}
           </div>
         </div>
         <div style={{ textAlign: "right", flexShrink: 0 }}>

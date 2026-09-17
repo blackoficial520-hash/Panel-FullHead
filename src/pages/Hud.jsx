@@ -166,11 +166,6 @@ function HudCard({ h, onCopy }) {
           <div style={{ display: "flex", gap: "6px", flexWrap: "wrap", alignItems: "center" }}>
             <FingersBadge fingers={h.fingers} />
             <GamaBadge notes={h.notes} />
-            {h.isPremium ? (
-              <span className="badge-premium">Premium</span>
-            ) : (
-              <span className="badge-free">Free</span>
-            )}
           </div>
         </div>
 

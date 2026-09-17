@@ -176,11 +176,6 @@ function TreinoCard({ t, idx, onCopy }) {
           <span style={{ display:"inline-block",background:lv.bg,border:`1px solid ${lv.color}44`,color:lv.color,fontSize:"9px",fontWeight:800,letterSpacing:"1.5px",padding:"3px 10px",borderRadius:"99px",textTransform:"uppercase" }}>
             {lv.label}
           </span>
-          {t.isPremium && (
-            <span style={{ display:"inline-block",background:"rgba(212,160,23,0.12)",border:"1px solid rgba(212,160,23,0.3)",color:"#D4A017",fontSize:"9px",fontWeight:800,letterSpacing:"1.5px",padding:"3px 10px",borderRadius:"99px",textTransform:"uppercase" }}>
-              ★ PREMIUM
-            </span>
-          )}
         </div>
 
         {/* Título */}

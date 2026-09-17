@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../firebase";
 
 const UPDATE_NOTICE_KEY = "fh_update_seen_v2_calibrador";
 
@@ -175,9 +177,13 @@ function ModCard({ mod, idx }) {
 
 export default function Dashboard() {
   const [showUpdate, setShowUpdate] = useState(false);
+  const [deviceCount, setDeviceCount] = useState(null);
 
   useEffect(() => {
     setShowUpdate(!localStorage.getItem(UPDATE_NOTICE_KEY));
+    getDocs(collection(db, "presets"))
+      .then((snap) => setDeviceCount(snap.size))
+      .catch(() => setDeviceCount(null));
   }, []);
 
   const dismissUpdate = () => {
@@ -268,8 +274,8 @@ export default function Dashboard() {
             </div>
             <div style={{ width: "1px", background: "#16192A", alignSelf: "stretch" }} />
             <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
-              <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: "18px", fontWeight: 700, color: "#D4AA00", letterSpacing: "1px", lineHeight: 1 }}>VIP</div>
-              <div style={{ fontSize: "9px", color: "#3A4060", letterSpacing: "2px", textTransform: "uppercase" }}>Sensibilidad</div>
+              <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: "18px", fontWeight: 700, color: "#D4AA00", letterSpacing: "1px", lineHeight: 1 }}>{deviceCount ?? "…"}</div>
+              <div style={{ fontSize: "9px", color: "#3A4060", letterSpacing: "2px", textTransform: "uppercase" }}>Dispositivos</div>
             </div>
           </div>
         </section>
@@ -285,29 +291,6 @@ export default function Dashboard() {
           {modules.map((mod, i) => (
             <ModCard key={mod.title} mod={mod} idx={i} />
           ))}
-
-          {/* Card Premium violeta */}
-          <div className="prem-card-fh card-enter" style={{ background: "#0A0C18", border: "1px solid rgba(109,74,255,0.2)", borderRadius: "13px", padding: "18px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: "12px", position: "relative", overflow: "hidden", flexWrap: "wrap", animationDelay: "0.4s" }}>
-            <div style={{ position: "absolute", left: "-40px", top: "-40px", width: "140px", height: "140px", borderRadius: "50%", background: "radial-gradient(circle, rgba(109,74,255,0.07) 0%, transparent 70%)", pointerEvents: "none" }} />
-            <div style={{ minWidth: 0, flex: "1 1 220px" }}>
-              <div style={{ display: "inline-flex", alignItems: "center", gap: "5px", padding: "3px 10px", borderRadius: "4px", background: "rgba(109,74,255,0.1)", border: "1px solid rgba(109,74,255,0.2)", marginBottom: "6px" }}>
-                <div style={{ width: "4px", height: "4px", borderRadius: "50%", background: "#7C3AED" }} />
-                <span style={{ fontSize: "8px", fontWeight: 700, letterSpacing: "3px", color: "#8B5CF6" }}>PREMIUM</span>
-              </div>
-              <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: "16px", fontWeight: 700, letterSpacing: "2px", color: "#B8C4E8", textTransform: "uppercase" }}>
-                Área Premium
-              </div>
-              <div style={{ fontSize: "11px", color: "#4A5578", marginTop: "3px" }}>
-                Contenido exclusivo VIP — próximamente disponible.
-              </div>
-            </div>
-            <div style={{ padding: "9px 16px", borderRadius: "8px", background: "rgba(109,74,255,0.07)", border: "1px solid rgba(109,74,255,0.15)", fontSize: "10px", fontWeight: 700, letterSpacing: "2px", color: "#4A3090", cursor: "not-allowed", whiteSpace: "nowrap", display: "flex", alignItems: "center", gap: "7px", textTransform: "uppercase", flexShrink: 0 }}>
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#4A3090" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-              </svg>
-              Próximamente
-            </div>
-          </div>
         </div>
 
         {/* TIP BAR */}

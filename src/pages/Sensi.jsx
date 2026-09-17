@@ -147,11 +147,6 @@ function PresetCard({ p, onCopy, isPopular, idx }) {
           </div>
           <div style={{ display: "flex", gap: "5px", flexWrap: "wrap", alignItems: "center" }}>
             <GamaBadge notes={p.notes} />
-            {p.isPremium ? (
-              <span className="badge-premium">Premium</span>
-            ) : (
-              <span className="badge-free">Free</span>
-            )}
             {isPopular && (
               <span style={{
                 display: "inline-block",
