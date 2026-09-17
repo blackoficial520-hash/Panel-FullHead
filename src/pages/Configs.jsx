@@ -272,7 +272,8 @@ export default function Configs() {
       .filter((i) => brand === "Todos" ? true : i.brand === brand)
       .filter((i) => {
         if (!s) return true;
-        return `${i.brand} ${i.model}`.toLowerCase().includes(s);
+        const haystack = `${i.brand} ${i.model}`.toLowerCase();
+        return s.split(/\s+/).every((token) => haystack.includes(token));
       })
       .sort((a, b) => `${a.brand} ${a.model}`.localeCompare(`${b.brand} ${b.model}`));
   }, [items, brand, search]);

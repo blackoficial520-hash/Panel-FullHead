@@ -285,7 +285,8 @@ export default function Sensi() {
       .filter((i) => brand === "Todos" ? true : i.brand === brand)
       .filter((i) => {
         if (!s) return true;
-        return `${i.brand} ${i.model} ${i.profile}`.toLowerCase().includes(s);
+        const haystack = `${i.brand} ${i.model} ${i.profile}`.toLowerCase();
+        return s.split(/\s+/).every((token) => haystack.includes(token));
       })
       .filter((i) => {
         if (!onlyPopular) return true;

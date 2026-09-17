@@ -260,7 +260,8 @@ export default function CalibradorLive() {
     .filter((p) => {
       const s = search.trim().toLowerCase();
       if (!s) return true;
-      return `${p.brand} ${p.model} ${p.profile}`.toLowerCase().includes(s);
+      const haystack = `${p.brand} ${p.model} ${p.profile}`.toLowerCase();
+      return s.split(/\s+/).every((token) => haystack.includes(token));
     })
     .sort((a, b) => `${a.brand} ${a.model}`.localeCompare(`${b.brand} ${b.model}`));
 

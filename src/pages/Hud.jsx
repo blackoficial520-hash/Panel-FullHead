@@ -298,7 +298,8 @@ export default function Hud() {
       .filter((i) => fingers === "Todos" ? true : i.fingers?.includes(fingers === "2" ? "2" : "3"))
       .filter((i) => {
         if (!s) return true;
-        return `${i.brand} ${i.model}`.toLowerCase().includes(s);
+        const haystack = `${i.brand} ${i.model}`.toLowerCase();
+        return s.split(/\s+/).every((token) => haystack.includes(token));
       })
       .sort((a, b) => `${a.brand} ${a.model}`.localeCompare(`${b.brand} ${b.model}`));
   }, [items, brand, search, fingers]);
