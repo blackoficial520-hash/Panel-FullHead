@@ -11,6 +11,7 @@ import Hud from "./pages/Hud.jsx";
 import Configs from "./pages/Configs.jsx";
 import Treinos from "./pages/Treinos.jsx";
 import CalibradorLive from "./pages/CalibradorLive.jsx";
+import GeneradorNicks from "./pages/GeneradorNicks.jsx";
 import Instalacion from "./pages/Instalacion.jsx";
 import AppLayout from "./components/AppLayout.jsx";
 import { inicializarNotificaciones } from "./utils/notifications.js";
@@ -147,6 +148,10 @@ export default function App() {
         <Route
           path="/calibrador"
           element={<ProtectedRoute><CalibradorLive /></ProtectedRoute>}
+        />
+        <Route
+          path="/nicks"
+          element={<ProtectedRoute><GeneradorNicks /></ProtectedRoute>}
         />
         <Route
           path="/"

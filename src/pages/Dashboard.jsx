@@ -79,6 +79,18 @@ const modules = [
       </svg>
     ),
   },
+  {
+    title: "Generador de Nicks",
+    desc: "Crea tu nombre estilo pro-player con símbolos y fuentes especiales.",
+    route: "/nicks",
+    accent: "#E67E22",
+    badge: { text: "NUEVO", bg: "rgba(230,126,34,0.12)", color: "#E67E22", border: "rgba(230,126,34,0.25)" },
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="#E67E22" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M4 7V4a1 1 0 0 1 1-1h3M20 7V4a1 1 0 0 0-1-1h-3M4 17v3a1 1 0 0 0 1 1h3M20 17v3a1 1 0 0 1-1 1h-3"/>
+      </svg>
+    ),
+  },
 ];
 
 function hexToRgba(hex, alpha) {

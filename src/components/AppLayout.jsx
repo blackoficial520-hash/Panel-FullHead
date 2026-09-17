@@ -66,6 +66,14 @@ const nav = [
     )
   },
   {
+    label: "Generador de Nicks", to: "/nicks",
+    icon: (
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 2H2v10l9.29 9.29a2.43 2.43 0 0 0 3.42 0l6.58-6.58a2.43 2.43 0 0 0 0-3.42L12 2Z"/><path d="M7 7h.01"/>
+      </svg>
+    )
+  },
+  {
     label: "Premium", to: "/premium", disabled: true, premium: true,
     icon: (
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
@@ -95,7 +103,7 @@ export default function AppLayout({ children }) {
 
   const userName = user?.displayName || user?.email?.split("@")[0] || "Usuario";
   const userInitial = userName.charAt(0).toUpperCase();
-  const isModuleRoute = ["/sensi", "/hud", "/configs", "/treinos", "/instalacion", "/calibrador"].includes(pathname);
+  const isModuleRoute = ["/sensi", "/hud", "/configs", "/treinos", "/instalacion", "/calibrador", "/nicks"].includes(pathname);
 
   if (isModuleRoute) {
     return <>{children}</>;
