@@ -13,7 +13,10 @@ firebase.initializeApp({
 const messaging = firebase.messaging();
 
 messaging.onBackgroundMessage((payload) => {
-  const { title, body, icon } = payload.notification || {};
+  // Ajuste aqui: se payload.notification estiver vazio, ele busca em payload.data
+  const title = payload.notification?.title || payload.data?.title;
+  const body = payload.notification?.body || payload.data?.body;
+  const icon = payload.notification?.icon || payload.data?.icon;
 
   const notificationTitle = title || '✅ Panel FullHead Activo';
   const notificationOptions = {
@@ -23,7 +26,7 @@ messaging.onBackgroundMessage((payload) => {
     tag: 'fullhead-panel-activo',
     renotify: false,
     requireInteraction: false,
-    vibrate: [200, 100, 200],
+    vibrate:,
     data: { url: '/' },
     actions: [
       { action: 'abrir', title: 'Abrir Panel' },
