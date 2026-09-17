@@ -58,10 +58,10 @@ const nav = [
     )
   },
   {
-    label: "Panel Externo", to: "/painel-externo",
+    label: "Calibrador en Vivo", to: "/calibrador",
     icon: (
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>
+        <circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/>
       </svg>
     )
   },
@@ -95,10 +95,9 @@ export default function AppLayout({ children }) {
 
   const userName = user?.displayName || user?.email?.split("@")[0] || "Usuario";
   const userInitial = userName.charAt(0).toUpperCase();
-  const isFullWidth = pathname === "/painel-externo";
-  const isModuleRoute = ["/sensi", "/hud", "/configs", "/treinos", "/instalacion"].includes(pathname);
+  const isModuleRoute = ["/sensi", "/hud", "/configs", "/treinos", "/instalacion", "/calibrador"].includes(pathname);
 
-  if (isFullWidth || isModuleRoute) {
+  if (isModuleRoute) {
     return <>{children}</>;
   }
 

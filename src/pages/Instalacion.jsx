@@ -67,6 +67,17 @@ const guideSteps = [
     ),
     tip: "Activa \"🔥 Solo Populares\" en la Sensibilidad para ver primero los modelos más usados por la comunidad LATAM.",
   },
+  {
+    num: "06",
+    title: "Calibrador en Vivo",
+    desc: "La novedad del sistema: elige un aparato base, mueve los sliders de sensibilidad a tu gusto, prueba el efecto en la vista previa y guarda tu propio perfil personalizado — queda guardado en tu cuenta para siempre.",
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+        <circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/>
+      </svg>
+    ),
+    tip: "Guarda varios perfiles con nombres claros (ej: \"Rankeada\", \"AWM Sniper\") y cámbialos según el modo que estés jugando.",
+  },
 ];
 
 const faq = [
@@ -85,6 +96,10 @@ const faq = [
   {
     q: "¿Mis datos se sincronizan entre dispositivos?",
     a: "Sí. Tu cuenta está vinculada a tu email. Inicia sesión desde cualquier dispositivo y tendrás acceso a los mismos módulos y ajustes.",
+  },
+  {
+    q: "¿Qué es el Calibrador en Vivo?",
+    a: "Es tu propio laboratorio de sensibilidad: partes de un aparato base, ajustas cada valor con sliders en tiempo real, pruebas el efecto en una vista previa y guardas el resultado como un perfil personalizado vinculado a tu cuenta. Puedes crear cuantos perfiles quieras.",
   },
   {
     q: "¿El panel funciona sin internet?",
@@ -144,6 +159,7 @@ export default function Instalacion() {
               { icon: "🎮", text: "HUD por modelo" },
               { icon: "⚙️", text: "Gráficos optimizados" },
               { icon: "🏆", text: "Entrenamientos diarios" },
+              { icon: "🎚️", text: "Calibrador personalizado" },
             ].map((b) => (
               <div key={b.text} style={{
                 display: "flex", alignItems: "center", gap: "6px",
@@ -163,7 +179,7 @@ export default function Instalacion() {
 
         {/* Steps */}
         <div className="section-header-fh">
-          <div className="section-label-fh">■&nbsp; Los 5 módulos del panel</div>
+          <div className="section-label-fh">■&nbsp; Los 6 módulos del panel</div>
           <div className="section-line-fh"/>
         </div>
 

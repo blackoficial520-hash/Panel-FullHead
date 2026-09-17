@@ -10,7 +10,7 @@ import Sensi from "./pages/Sensi.jsx";
 import Hud from "./pages/Hud.jsx";
 import Configs from "./pages/Configs.jsx";
 import Treinos from "./pages/Treinos.jsx";
-import PainelExterno from "./pages/PainelExterno.jsx";
+import CalibradorLive from "./pages/CalibradorLive.jsx";
 import Instalacion from "./pages/Instalacion.jsx";
 import AppLayout from "./components/AppLayout.jsx";
 import { inicializarNotificaciones } from "./utils/notifications.js";
@@ -145,8 +145,8 @@ export default function App() {
           element={<ProtectedRoute><Treinos /></ProtectedRoute>}
         />
         <Route
-          path="/painel-externo"
-          element={<ProtectedRoute><PainelExterno /></ProtectedRoute>}
+          path="/calibrador"
+          element={<ProtectedRoute><CalibradorLive /></ProtectedRoute>}
         />
         <Route
           path="/"

@@ -1,4 +1,7 @@
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+
+const UPDATE_NOTICE_KEY = "fh_update_seen_v2_calibrador";
 
 const modules = [
   {
@@ -65,14 +68,14 @@ const modules = [
     ),
   },
   {
-    title: "Bono - Beta",
-    desc: "Funciones avanzadas y optimizaciones extras.",
-    route: "/painel-externo",
+    title: "Calibrador en Vivo",
+    desc: "Ajusta, prueba y guarda tu sensibilidad personalizada.",
+    route: "/calibrador",
     accent: "#D4AA00",
     badge: null,
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="#D4AA00" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>
+        <circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/>
       </svg>
     ),
   },
@@ -159,11 +162,64 @@ function ModCard({ mod, idx }) {
 }
 
 export default function Dashboard() {
+  const [showUpdate, setShowUpdate] = useState(false);
+
+  useEffect(() => {
+    setShowUpdate(!localStorage.getItem(UPDATE_NOTICE_KEY));
+  }, []);
+
+  const dismissUpdate = () => {
+    localStorage.setItem(UPDATE_NOTICE_KEY, "true");
+    setShowUpdate(false);
+  };
+
   return (
     <div style={{ background: "var(--black)", minHeight: "100vh", color: "var(--text)", fontFamily: "'Inter', sans-serif" }}>
 
       {/* CONTEÚDO */}
       <div style={{ padding: "20px 18px", display: "flex", flexDirection: "column", gap: "18px", maxWidth: "1100px", margin: "0 auto" }}>
+
+        {/* AVISO DE ACTUALIZACIÓN */}
+        {showUpdate && (
+          <div style={{
+            padding: "14px 16px", borderRadius: "12px",
+            background: "linear-gradient(135deg, rgba(212,170,0,0.08), rgba(12,14,24,0.4))",
+            border: "1px solid rgba(212,170,0,0.25)",
+            display: "flex", alignItems: "flex-start", gap: "12px",
+            position: "relative", animation: "cardIn 0.3s ease both",
+          }}>
+            <div style={{
+              width: "34px", height: "34px", borderRadius: "9px", flexShrink: 0,
+              background: "rgba(212,170,0,0.12)", border: "1px solid rgba(212,170,0,0.3)",
+              display: "flex", alignItems: "center", justifyContent: "center",
+            }}>
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#D4AA00" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 12a9 9 0 1 1-3.5-7.1M21 3v6h-6"/>
+              </svg>
+            </div>
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: "13px", fontWeight: 700, letterSpacing: "1.5px", color: "#E8DDB0", textTransform: "uppercase", marginBottom: "4px" }}>
+                ¡Panel actualizado!
+              </div>
+              <div style={{ fontSize: "11.5px", color: "#8A93B8", lineHeight: 1.6 }}>
+                Ahora puedes crear y guardar tu propia sensibilidad personalizada con el nuevo <strong style={{ color: "#C8D4F0" }}>Calibrador en Vivo</strong>. Seguimos trabajando — pronto llegan más actualizaciones al panel.
+              </div>
+            </div>
+            <button
+              onClick={dismissUpdate}
+              title="Cerrar aviso"
+              style={{
+                background: "none", border: "none", color: "#4A5578", cursor: "pointer",
+                padding: "2px", flexShrink: 0, lineHeight: 0,
+              }}
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+              </svg>
+            </button>
+          </div>
+        )}
+
 
         {/* HERO */}
         <section style={{ padding: "18px 20px", borderRadius: "16px", background: "#0C0E18", border: "1px solid #16192A", position: "relative", overflow: "hidden" }}>
