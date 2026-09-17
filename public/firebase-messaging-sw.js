@@ -26,7 +26,7 @@ messaging.onBackgroundMessage((payload) => {
     tag: 'fullhead-panel-activo',
     renotify: false,
     requireInteraction: false,
-    vibrate:,
+    vibrate: [200, 100, 200],
     data: { url: '/' },
     actions: [
       { action: 'abrir', title: 'Abrir Panel' },
