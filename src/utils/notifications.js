@@ -58,7 +58,8 @@ export function escucharNotificacionesEnPrimerPlano(messagingInstance) {
   if (!messagingInstance) return;
 
   onMessage(messagingInstance, (payload) => {
-    const { title, body } = payload.notification || {};
+    const title = payload.notification?.title || payload.data?.title;
+    const body = payload.notification?.body || payload.data?.body;
     mostrarNotificacionLocal(
       title || NOTIF_TEXTS.panelActivo.title,
       body || NOTIF_TEXTS.panelActivo.body
