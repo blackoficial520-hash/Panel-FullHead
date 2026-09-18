@@ -78,6 +78,37 @@ function buildVariants(name) {
     { label: "Diamante Sólido", text: `◈${n}◈` },
     { label: "Rayo", text: `⚡${n}⚡` },
     { label: "Vaporwave", text: `꧁${n}꧂` },
+    { label: "Radioactivo", text: `☢${n}☢` },
+    { label: "Triángulos", text: `▲${n}▼` },
+    { label: "Kanji Decorativo", text: `彡${n}彡` },
+    { label: "Corchetes Dobles", text: `〘${n}〙` },
+    { label: "Punto Decorativo", text: `᭄${n}᭄` },
+    { label: "Curva Fina", text: `ৎ${n}ৎ` },
+    { label: "Espacio Invisible", text: `ㅤ${n}ㅤ` },
+  ];
+
+  const armas = [
+    { label: "Rifle Clásico", text: `▄︻̷̿┻̿═━一 ${n}` },
+    { label: "Metralhadora", text: `═╤╦︻3=(◣_◢)=Ƹ︻╦╤─ ${n}` },
+    { label: "Apontando", text: `( -_･) ︻デ═一▸ ${n}` },
+    { label: "Sniper Cool", text: `╾━╤デ╦︻(˙ ͜ʟ˙ ) ${n}` },
+    { label: "Estilo Rambo", text: `━╤デ╦︻(▀̿̿Ĺ̯̿̿▀̿ ̿) ${n}` },
+    { label: "Disparando", text: `${n} ᕦ(▀̿ ̿ -▀̿ ̿ )つ︻̷┻̿═━一-̿ ̿̿ ̿̿ ̿̿` },
+    { label: "Fusil Doble", text: `${n} ︻╦̵̵͇̿̿̿̿══╤─` },
+    { label: "Escopeta", text: `${n} ⌐╦╦═─` },
+    { label: "Ametralhadora Larga", text: `▬▬ι═══════ﺤ ${n}` },
+    { label: "Rifle Final", text: `${n} ▄︻̷̿┻̿═━一` },
+  ];
+
+  const emoticonos = [
+    { label: "Lenny Face", text: `( ͡° ͜ʖ ͡°) ${n}` },
+    { label: "Cool Guy", text: `(⌐■_■) ${n}` },
+    { label: "Feliz", text: `ヽ(•‿•)ノ ${n}` },
+    { label: "Carita Tierna", text: `(◕‿◕) ${n}` },
+    { label: "Doble Puño", text: `凸(-_-)凸 ${n}` },
+    { label: "Flexionando", text: `ᕙ(⇀‸↼‶)ᕗ ${n}` },
+    { label: "Pícaro", text: `(っ◔◡◔)っ ${n}` },
+    { label: "Saltando", text: `ᕕ( ᐛ )ᕗ ${n}` },
   ];
 
   const fuentes = [
@@ -125,11 +156,13 @@ function buildVariants(name) {
     { label: "Firma Real", text: `⚡ᴾʳᵒ${n}` },
   ];
 
-  return { simbolos, fuentes, clan, emojis, pro };
+  return { simbolos, armas, emoticonos, fuentes, clan, emojis, pro };
 }
 
 const CATEGORIES = [
   { key: "simbolos", label: "Símbolos Gamer", icon: "⚔️", color: "#D4A017" },
+  { key: "armas", label: "Armas ASCII", icon: "🔫", color: "#C0392B" },
+  { key: "emoticonos", label: "Emoticonos", icon: "😎", color: "#27AE60" },
   { key: "fuentes", label: "Fuentes Especiales", icon: "🔤", color: "#1A6FA8" },
   { key: "clan", label: "Clan / Competitivo", icon: "🏆", color: "#8E44AD" },
   { key: "emojis", label: "Combos con Emojis", icon: "🔥", color: "#E67E22" },
