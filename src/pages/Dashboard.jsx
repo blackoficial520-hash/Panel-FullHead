@@ -83,7 +83,7 @@ const modules = [
     ),
   },
   {
-    title: "Firma PRO",
+    title: "Firma PRO · genera tu nick con estilo",
     desc: "Crea tu firma estilo pro-player con símbolos y fuentes especiales.",
     route: "/nicks",
     accent: "#E67E22",
