@@ -58,7 +58,13 @@ function ProtectedRoute({ children }) {
       setUser(u || null);
       if (u && !notifInicializadas.current) {
         notifInicializadas.current = true;
-        inicializarNotificaciones(u.uid, messaging);
+        // Só dispara sozinho se a permissão JÁ foi concedida antes (não exige
+        // gesto do usuário nesse caso). Se ainda estiver "default", o Chrome
+        // bloqueia silenciosamente um pedido automático — por isso deixamos
+        // pro botão "Activar Notificaciones" no Dashboard, que é um toque real.
+        if (typeof Notification !== "undefined" && Notification.permission === "granted") {
+          inicializarNotificaciones(u.uid, messaging);
+        }
       }
     });
     return () => unsub();

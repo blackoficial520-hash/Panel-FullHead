@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { collection, getDocs } from "firebase/firestore";
-import { db } from "../firebase";
+import { db, auth, messaging } from "../firebase";
+import { inicializarNotificaciones } from "../utils/notifications.js";
 
 const UPDATE_NOTICE_KEY = "fh_update_seen_v2_calibrador";
 
@@ -178,17 +179,35 @@ function ModCard({ mod, idx }) {
 export default function Dashboard() {
   const [showUpdate, setShowUpdate] = useState(false);
   const [deviceCount, setDeviceCount] = useState(null);
+  const [notifStatus, setNotifStatus] = useState("default");
+  const [notifLoading, setNotifLoading] = useState(false);
 
   useEffect(() => {
     setShowUpdate(!localStorage.getItem(UPDATE_NOTICE_KEY));
     getDocs(collection(db, "presets"))
       .then((snap) => setDeviceCount(snap.size))
       .catch(() => setDeviceCount(null));
+    if (typeof Notification !== "undefined") {
+      setNotifStatus(Notification.permission);
+    }
   }, []);
 
   const dismissUpdate = () => {
     localStorage.setItem(UPDATE_NOTICE_KEY, "true");
     setShowUpdate(false);
+  };
+
+  const activarNotificaciones = async () => {
+    // Chamado direto de um clique — isso conta como gesto real do usuário,
+    // então o navegador não bloqueia o pedido de permissão.
+    setNotifLoading(true);
+    try {
+      const user = auth.currentUser;
+      if (user) await inicializarNotificaciones(user.uid, messaging);
+    } finally {
+      setNotifLoading(false);
+      if (typeof Notification !== "undefined") setNotifStatus(Notification.permission);
+    }
   };
 
   return (
@@ -234,6 +253,48 @@ export default function Dashboard() {
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
               </svg>
+            </button>
+          </div>
+        )}
+
+        {/* ACTIVAR NOTIFICACIONES */}
+        {notifStatus === "default" && (
+          <div style={{
+            padding: "14px 16px", borderRadius: "12px",
+            background: "rgba(255,255,255,0.02)",
+            border: "1px solid rgba(255,255,255,0.08)",
+            display: "flex", alignItems: "center", gap: "12px",
+            flexWrap: "wrap", animation: "cardIn 0.3s ease both",
+          }}>
+            <div style={{
+              width: "34px", height: "34px", borderRadius: "9px", flexShrink: 0,
+              background: "rgba(74,143,255,0.1)", border: "1px solid rgba(74,143,255,0.25)",
+              display: "flex", alignItems: "center", justifyContent: "center",
+            }}>
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#4A8FFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+              </svg>
+            </div>
+            <div style={{ flex: 1, minWidth: "180px" }}>
+              <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: "13px", fontWeight: 700, letterSpacing: "1px", color: "#C8D4F0" }}>
+                Activa las notificaciones
+              </div>
+              <div style={{ fontSize: "11px", color: "#4A5578" }}>
+                Entérate cuando haya novedades en el panel.
+              </div>
+            </div>
+            <button
+              onClick={activarNotificaciones}
+              disabled={notifLoading}
+              style={{
+                padding: "9px 16px", borderRadius: "8px",
+                background: "rgba(74,143,255,0.1)", border: "1px solid rgba(74,143,255,0.3)",
+                color: "#4A8FFF", fontSize: "11px", fontWeight: 700, letterSpacing: "1px",
+                cursor: notifLoading ? "not-allowed" : "pointer", textTransform: "uppercase",
+                flexShrink: 0,
+              }}
+            >
+              {notifLoading ? "Activando..." : "Activar"}
             </button>
           </div>
         )}
