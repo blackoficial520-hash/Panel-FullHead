@@ -66,7 +66,7 @@ const nav = [
     )
   },
   {
-    label: "Generador de Nicks", to: "/nicks",
+    label: "Firma PRO", to: "/nicks",
     icon: (
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
         <path d="M12 2H2v10l9.29 9.29a2.43 2.43 0 0 0 3.42 0l6.58-6.58a2.43 2.43 0 0 0 0-3.42L12 2Z"/><path d="M7 7h.01"/>

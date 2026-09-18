@@ -83,8 +83,8 @@ const modules = [
     ),
   },
   {
-    title: "Generador de Nicks",
-    desc: "Crea tu nombre estilo pro-player con símbolos y fuentes especiales.",
+    title: "Firma PRO",
+    desc: "Crea tu firma estilo pro-player con símbolos y fuentes especiales.",
     route: "/nicks",
     accent: "#E67E22",
     badge: { text: "NUEVO", bg: "rgba(230,126,34,0.12)", color: "#E67E22", border: "rgba(230,126,34,0.25)" },
