@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 
 // ── MAPAS DE FUENTES UNICODE ────────────────────────────
@@ -129,23 +129,18 @@ function buildVariants(name) {
 }
 
 const CATEGORIES = [
-  { key: "simbolos", label: "Símbolos Gamer", icon: "⚔️", color: "#D4A017", locked: false },
-  { key: "fuentes", label: "Fuentes Especiales", icon: "🔤", color: "#1A6FA8", locked: false },
-  { key: "clan", label: "Clan / Competitivo", icon: "🏆", color: "#8E44AD", locked: false },
-  { key: "emojis", label: "Combos con Emojis", icon: "🔥", color: "#E67E22", locked: false },
-  { key: "pro", label: "Exclusivos PRO", icon: "⚡", color: "#F0C040", locked: true },
+  { key: "simbolos", label: "Símbolos Gamer", icon: "⚔️", color: "#D4A017" },
+  { key: "fuentes", label: "Fuentes Especiales", icon: "🔤", color: "#1A6FA8" },
+  { key: "clan", label: "Clan / Competitivo", icon: "🏆", color: "#8E44AD" },
+  { key: "emojis", label: "Combos con Emojis", icon: "🔥", color: "#E67E22" },
+  { key: "pro", label: "Exclusivos PRO", icon: "⚡", color: "#F0C040" },
 ];
-
-// Código de desbloqueo de la categoría PRO — cámbialo aquí cuando quieras.
-const CODIGO_FIRMA_PRO = "FIRMAPRO2026";
-const UNLOCK_KEY = "fh_firma_pro_unlocked";
 
 const STYLES = `
   @keyframes nk-in { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
   .nk-card { animation: nk-in 0.25s ease both; }
   @keyframes nk-copied { 0% { transform:scale(1); } 50% { transform:scale(1.06); } 100% { transform:scale(1); } }
   .nk-copied-anim { animation: nk-copied 0.25s ease; }
-  @keyframes nk-glow { 0%,100% { box-shadow: 0 0 0 0 rgba(240,192,64,0.3); } 50% { box-shadow: 0 0 0 6px rgba(240,192,64,0); } }
 `;
 
 export default function GeneradorNicks() {
@@ -154,13 +149,6 @@ export default function GeneradorNicks() {
   const [activeCat, setActiveCat] = useState("simbolos");
   const [copiedIdx, setCopiedIdx] = useState(null);
   const [shuffleSeed, setShuffleSeed] = useState(0);
-  const [unlocked, setUnlocked] = useState(false);
-  const [codeInput, setCodeInput] = useState("");
-  const [codeError, setCodeError] = useState(false);
-
-  useEffect(() => {
-    setUnlocked(localStorage.getItem(UNLOCK_KEY) === "true");
-  }, []);
 
   const variants = useMemo(() => buildVariants(name), [name]);
   const activeList = useMemo(() => {
@@ -187,19 +175,6 @@ export default function GeneradorNicks() {
     const msg = encodeURIComponent(`Mira mi nueva Firma PRO: ${text} 🔥 Generado en FullHead`);
     window.open(`https://wa.me/?text=${msg}`, "_blank");
   }
-
-  function handleUnlock() {
-    if (codeInput.trim().toUpperCase() === CODIGO_FIRMA_PRO) {
-      localStorage.setItem(UNLOCK_KEY, "true");
-      setUnlocked(true);
-      setCodeError(false);
-    } else {
-      setCodeError(true);
-    }
-  }
-
-  const activeCategory = CATEGORIES.find((c) => c.key === activeCat);
-  const showLocked = activeCategory?.locked && !unlocked;
 
   return (
     <div className="module-page" style={{ overflowY: "auto", paddingBottom: "60px" }}>
@@ -256,69 +231,14 @@ export default function GeneradorNicks() {
                 color: activeCat === c.key ? c.color : "var(--text-muted)",
                 fontFamily: "'Rajdhani', sans-serif", fontSize: "13px", fontWeight: 700,
                 letterSpacing: "0.3px", cursor: "pointer", whiteSpace: "nowrap",
-                animation: c.locked && !unlocked ? "nk-glow 2.5s infinite" : "none",
               }}
             >
               <span>{c.icon}</span>{c.label}
-              {c.locked && !unlocked && (
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                  <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-                </svg>
-              )}
             </button>
           ))}
         </div>
 
-        {showLocked ? (
-          /* ── TELA DE DESBLOQUEO ─────────────────────── */
-          <div className="nk-card" style={{
-            padding: "28px 22px", borderRadius: "12px", textAlign: "center",
-            background: "linear-gradient(135deg, rgba(240,192,64,0.06), rgba(10,10,10,0))",
-            border: "1px solid rgba(240,192,64,0.25)",
-          }}>
-            <div style={{
-              width: "52px", height: "52px", borderRadius: "50%", margin: "0 auto 14px",
-              background: "rgba(240,192,64,0.1)", border: "1px solid rgba(240,192,64,0.3)",
-              display: "flex", alignItems: "center", justifyContent: "center",
-            }}>
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F0C040" strokeWidth="2">
-                <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-              </svg>
-            </div>
-            <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: "18px", fontWeight: 700, color: "#F0C040", letterSpacing: "1px", marginBottom: "6px" }}>
-              Categoría Exclusiva PRO
-            </div>
-            <div style={{ fontSize: "12px", color: "var(--text-muted)", marginBottom: "18px", maxWidth: "320px", marginLeft: "auto", marginRight: "auto", lineHeight: 1.6 }}>
-              Ingresa el código que recibiste al adquirir la Firma PRO para desbloquear estas firmas exclusivas.
-            </div>
-            <div style={{ display: "flex", gap: "8px", maxWidth: "320px", margin: "0 auto" }}>
-              <input
-                value={codeInput}
-                onChange={(e) => { setCodeInput(e.target.value); setCodeError(false); }}
-                placeholder="Código de acceso"
-                className="fh-input"
-                style={{ flex: 1, textAlign: "center", letterSpacing: "1px", textTransform: "uppercase" }}
-                onKeyDown={(e) => e.key === "Enter" && handleUnlock()}
-              />
-              <button
-                onClick={handleUnlock}
-                style={{
-                  padding: "10px 18px", borderRadius: "8px", border: "none",
-                  background: "linear-gradient(90deg,#8A6610,#F0C040)", color: "#000",
-                  fontFamily: "'Rajdhani', sans-serif", fontWeight: 700, fontSize: "13px", cursor: "pointer",
-                }}
-              >
-                Desbloquear
-              </button>
-            </div>
-            {codeError && (
-              <div style={{ color: "#C0392B", fontSize: "11px", marginTop: "10px" }}>
-                Código incorrecto. Verifica el que recibiste en tu compra.
-              </div>
-            )}
-          </div>
-        ) : (
-          <>
+        <>
             {activeCat === "simbolos" && (
               <button
                 onClick={() => setShuffleSeed((s) => s + 1)}
@@ -393,7 +313,6 @@ export default function GeneradorNicks() {
               ))}
             </div>
           </>
-        )}
 
         <div style={{
           marginTop: "20px", padding: "12px 16px", borderRadius: "8px",
