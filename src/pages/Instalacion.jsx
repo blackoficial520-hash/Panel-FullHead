@@ -78,6 +78,17 @@ const guideSteps = [
     ),
     tip: "Guarda varios perfiles con nombres claros (ej: \"Rankeada\", \"AWM Sniper\") y cámbialos según el modo que estés jugando.",
   },
+  {
+    num: "07",
+    title: "Firma PRO",
+    desc: "Crea tu firma estilo pro-player con más de 80 combinaciones — símbolos gamer, armas ASCII, emoticonos, fuentes especiales y tags de clan. Escribe tu nombre una vez y explora todas las categorías.",
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+        <path d="M12 2H2v10l9.29 9.29a2.43 2.43 0 0 0 3.42 0l6.58-6.58a2.43 2.43 0 0 0 0-3.42L12 2Z"/><path d="M7 7h.01"/>
+      </svg>
+    ),
+    tip: "Usa el botón de compartir para mandar tu firma directo por WhatsApp — buena forma de presumir tu nuevo nick.",
+  },
 ];
 
 const faq = [
@@ -160,6 +171,7 @@ export default function Instalacion() {
               { icon: "⚙️", text: "Gráficos optimizados" },
               { icon: "🏆", text: "Entrenamientos diarios" },
               { icon: "🎚️", text: "Calibrador personalizado" },
+              { icon: "✍️", text: "Firma PRO" },
             ].map((b) => (
               <div key={b.text} style={{
                 display: "flex", alignItems: "center", gap: "6px",
@@ -179,7 +191,7 @@ export default function Instalacion() {
 
         {/* Steps */}
         <div className="section-header-fh">
-          <div className="section-label-fh">■&nbsp; Los 6 módulos del panel</div>
+          <div className="section-label-fh">■&nbsp; Los 7 módulos del panel</div>
           <div className="section-line-fh"/>
         </div>
 
