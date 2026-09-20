@@ -4,7 +4,7 @@ import { collection, getDocs } from "firebase/firestore";
 import { db, auth, messaging } from "../firebase";
 import { inicializarNotificaciones } from "../utils/notifications.js";
 
-const UPDATE_NOTICE_KEY = "fh_update_seen_v2_calibrador";
+const UPDATE_NOTICE_KEY = "fh_update_seen_v3_firmapro";
 
 const modules = [
   {
@@ -239,7 +239,7 @@ export default function Dashboard() {
                 ¡Panel actualizado!
               </div>
               <div style={{ fontSize: "11.5px", color: "#8A93B8", lineHeight: 1.6 }}>
-                Ahora puedes crear y guardar tu propia sensibilidad personalizada con el nuevo <strong style={{ color: "#C8D4F0" }}>Calibrador en Vivo</strong>. Seguimos trabajando — pronto llegan más actualizaciones al panel.
+                Llegó la <strong style={{ color: "#C8D4F0" }}>Firma PRO</strong> con más de 80 estilos y símbolos, y el nuevo <strong style={{ color: "#C8D4F0" }}>Detector de Pantalla en Vivo</strong> dentro del Calibrador — mide la tasa de refresco real de tu celular en un toque. Seguimos trabajando — pronto llegan más actualizaciones al panel.
               </div>
             </div>
             <button
