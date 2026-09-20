@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState, useCallback } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { db } from "../firebase";
+import { buildSupportMailto } from "../utils/support.js";
 
 // ── TOAST ──────────────────────────────────────────────
 function Toast({ visible }) {
@@ -437,6 +438,18 @@ export default function Hud() {
             <div style={{ fontSize: "11px", color: "var(--text-muted)", marginTop: "8px" }}>
               Prueba buscar solo la marca
             </div>
+            <a
+              href={buildSupportMailto(search ? `${brand !== "Todos" ? brand + " " : ""}${search}` : "")}
+              style={{
+                display: "inline-flex", alignItems: "center", gap: "6px",
+                marginTop: "16px", padding: "9px 16px", borderRadius: "8px",
+                background: "rgba(212,160,23,0.08)", border: "1px solid var(--border-gold)",
+                color: "var(--gold)", fontSize: "12px", fontWeight: 700,
+                textDecoration: "none",
+              }}
+            >
+              📩 Avisar a soporte sobre mi modelo
+            </a>
           </div>
         ) : (
           <div style={{
