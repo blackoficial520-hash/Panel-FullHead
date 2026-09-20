@@ -70,7 +70,7 @@ const guideSteps = [
   {
     num: "06",
     title: "Calibrador en Vivo",
-    desc: "La novedad del sistema: elige un aparato base, mueve los sliders de sensibilidad a tu gusto, prueba el efecto en la vista previa y guarda tu propio perfil personalizado — queda guardado en tu cuenta para siempre.",
+    desc: "Detecta la tasa de refresco real de tu pantalla en un toque, elige un aparato base, mueve los sliders de sensibilidad a tu gusto, prueba el efecto en la vista previa y guarda tu propio perfil personalizado — queda guardado en tu cuenta para siempre.",
     icon: (
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
         <circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/>

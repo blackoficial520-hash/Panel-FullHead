@@ -26,6 +26,8 @@ const STYLES = `
   .cl-row { animation: row-in 0.3s ease both; }
   .cl-section { animation: glow-in 0.4s ease both; }
   .cl-log-line { animation: glow-in 0.2s ease both; }
+  @keyframes scan-spin { to { transform: rotate(360deg); } }
+  @keyframes scan-pulse { 0%,100% { opacity:0.4; } 50% { opacity:1; } }
 `;
 
 const SLIDER_FIELDS = [
@@ -38,6 +40,36 @@ const SLIDER_FIELDS = [
 ];
 
 const DEFAULT_VALUES = { general: 100, redDot: 90, x2: 80, x4: 70, awm: 60, freeLook: 15 };
+const COMMON_HZ = [60, 90, 120, 144, 165, 240];
+
+function snapToCommonHz(measured) {
+  return COMMON_HZ.reduce((closest, hz) =>
+    Math.abs(hz - measured) < Math.abs(closest - measured) ? hz : closest
+  , COMMON_HZ[0]);
+}
+
+// Mide la tasa de refresco REAL de la pantalla contando cuadros dibujados
+// por el propio navegador durante ~1.2s — no es un valor inventado.
+function measureRefreshRate(onDone) {
+  let frames = 0;
+  const start = performance.now();
+  function tick() {
+    frames++;
+    const elapsed = performance.now() - start;
+    if (elapsed < 1200) {
+      requestAnimationFrame(tick);
+    } else {
+      const fps = (frames / elapsed) * 1000;
+      onDone(snapToCommonHz(fps), Math.round(fps));
+    }
+  }
+  requestAnimationFrame(tick);
+}
+
+function extractHz(notes) {
+  const m = /(\d+)\s*Hz/i.exec(notes || "");
+  return m ? Number(m[1]) : null;
+}
 
 function SectionBlock({ title, icon, color, borderColor, bgColor, children, delay = "0s" }) {
   return (
@@ -218,6 +250,12 @@ export default function CalibradorLive() {
   const [log, setLog] = useState([]);
   const logRef = useRef(null);
 
+  // Detector de Pantalla
+  const [detecting, setDetecting] = useState(false);
+  const [detectedHz, setDetectedHz] = useState(null);
+  const [rawFps, setRawFps] = useState(null);
+  const [hzFilter, setHzFilter] = useState(null);
+
   const pushLog = (msg, type = "info") => {
     const ts = new Date().toLocaleTimeString("es-ES", { hour12: false });
     setLog((l) => [...l, { ts, msg, type }]);
@@ -257,6 +295,7 @@ export default function CalibradorLive() {
   const brands = ["Todos", ...Array.from(new Set(presets.map((p) => p.brand))).sort()];
   const filtered = presets
     .filter((p) => brand === "Todos" ? true : p.brand === brand)
+    .filter((p) => hzFilter ? extractHz(p.notes) === hzFilter : true)
     .filter((p) => {
       const s = search.trim().toLowerCase();
       if (!s) return true;
@@ -275,6 +314,29 @@ export default function CalibradorLive() {
 
   function handleSliderChange(key, val) {
     setValues((v) => ({ ...v, [key]: val }));
+  }
+
+  function handleDetectScreen() {
+    setDetecting(true);
+    setDetectedHz(null);
+    pushLog("📡 Midiendo la tasa de refresco real de tu pantalla...");
+    measureRefreshRate((snapped, raw) => {
+      setDetecting(false);
+      setDetectedHz(snapped);
+      setRawFps(raw);
+      pushLog(`✓ Pantalla detectada: ${snapped}Hz (medido: ${raw}Hz real)`, "success");
+    });
+  }
+
+  function applyHzFilter() {
+    setHzFilter(detectedHz);
+    setBrand("Todos");
+    setSearch("");
+    pushLog(`✓ Filtrando aparatos con pantalla de ${detectedHz}Hz.`);
+  }
+
+  function clearHzFilter() {
+    setHzFilter(null);
   }
 
   async function handleSave() {
@@ -353,8 +415,106 @@ export default function CalibradorLive() {
           Elige un aparato como punto de partida, ajusta los sliders a tu gusto, prueba el efecto en la vista previa y guarda tu propio perfil — queda vinculado a tu cuenta para siempre.
         </div>
 
+        {/* Detector de Pantalla */}
+        <SectionBlock title="Detector de Pantalla" icon="📡" color="#27AE60" borderColor="rgba(39,174,96,0.3)" bgColor="rgba(39,174,96,0.04)">
+          {!detectedHz && !detecting && (
+            <>
+              <p style={{ fontSize: "12px", color: "var(--text-muted)", lineHeight: 1.6, marginBottom: "12px" }}>
+                Medimos la tasa de refresco real de tu pantalla en vivo — sin necesidad de buscar tu modelo manualmente.
+              </p>
+              <button
+                onClick={handleDetectScreen}
+                style={{
+                  width: "100%", padding: "12px", borderRadius: "8px",
+                  border: "1px solid rgba(39,174,96,0.4)", background: "rgba(39,174,96,0.1)",
+                  color: "#27AE60", fontFamily: "'Rajdhani', sans-serif", fontWeight: 700,
+                  fontSize: "14px", letterSpacing: "1px", cursor: "pointer",
+                }}
+              >
+                📡 DETECTAR MI PANTALLA
+              </button>
+            </>
+          )}
+
+          {detecting && (
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", padding: "20px 0" }}>
+              <div style={{
+                width: "56px", height: "56px", borderRadius: "50%", position: "relative", marginBottom: "14px",
+              }}>
+                <div style={{
+                  position: "absolute", inset: 0, borderRadius: "50%",
+                  border: "3px solid rgba(39,174,96,0.15)",
+                }}/>
+                <div style={{
+                  position: "absolute", inset: 0, borderRadius: "50%",
+                  border: "3px solid transparent", borderTopColor: "#27AE60",
+                  animation: "scan-spin 0.8s linear infinite",
+                }}/>
+                <div style={{
+                  position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center",
+                  fontSize: "20px", animation: "scan-pulse 1s ease infinite",
+                }}>📡</div>
+              </div>
+              <div style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: "12px", color: "#27AE60", letterSpacing: "1px" }}>
+                Midiendo cuadros por segundo...
+              </div>
+            </div>
+          )}
+
+          {detectedHz && !detecting && (
+            <div>
+              <div style={{
+                display: "flex", alignItems: "center", gap: "14px",
+                padding: "14px 16px", borderRadius: "10px",
+                background: "rgba(39,174,96,0.08)", border: "1px solid rgba(39,174,96,0.25)",
+                marginBottom: "10px",
+              }}>
+                <div style={{
+                  fontFamily: "'Bebas Neue', sans-serif", fontSize: "32px", color: "#27AE60", lineHeight: 1,
+                }}>{detectedHz}<span style={{ fontSize: "14px" }}>Hz</span></div>
+                <div style={{ fontSize: "11px", color: "var(--text-muted)", lineHeight: 1.5 }}>
+                  Tasa de refresco real detectada<br/>
+                  <span style={{ opacity: 0.6 }}>(medición cruda: ~{rawFps}Hz)</span>
+                </div>
+              </div>
+              <div style={{ display: "flex", gap: "8px" }}>
+                <button
+                  onClick={applyHzFilter}
+                  style={{
+                    flex: 1, padding: "10px", borderRadius: "8px", border: "1px solid var(--border-gold)",
+                    background: "rgba(212,160,23,0.08)", color: "var(--gold)",
+                    fontFamily: "'Rajdhani', sans-serif", fontWeight: 700, fontSize: "12px", cursor: "pointer",
+                  }}
+                >
+                  Filtrar aparatos con {detectedHz}Hz
+                </button>
+                <button
+                  onClick={handleDetectScreen}
+                  title="Medir de nuevo"
+                  style={{
+                    padding: "10px 14px", borderRadius: "8px", border: "1px solid rgba(255,255,255,0.1)",
+                    background: "none", color: "var(--text-muted)", cursor: "pointer", fontSize: "12px",
+                  }}
+                >
+                  ↻
+                </button>
+              </div>
+            </div>
+          )}
+        </SectionBlock>
+
         {/* Punto de partida */}
         <SectionBlock title="Punto de Partida" icon="📱" color="#D4A017" borderColor="var(--border-gold)" bgColor="rgba(212,160,23,0.04)">
+          {hzFilter && (
+            <div style={{
+              display: "flex", alignItems: "center", justifyContent: "space-between",
+              marginBottom: "10px", padding: "7px 12px", borderRadius: "7px",
+              background: "rgba(39,174,96,0.08)", border: "1px solid rgba(39,174,96,0.25)",
+            }}>
+              <span style={{ fontSize: "11px", color: "#27AE60" }}>📡 Filtrando por {hzFilter}Hz detectado</span>
+              <button onClick={clearHzFilter} style={{ background: "none", border: "none", color: "#27AE60", cursor: "pointer", fontSize: "14px", padding: 0 }}>✕</button>
+            </div>
+          )}
           <div style={{ display: "flex", gap: "8px", marginBottom: "10px", flexWrap: "wrap" }}>
             <select value={brand} onChange={(e) => setBrand(e.target.value)} className="fh-select" style={{ flex: 1, minWidth: "120px", maxWidth: "170px" }}>
               {brands.map((b) => <option key={b} value={b}>{b}</option>)}
@@ -367,6 +527,12 @@ export default function CalibradorLive() {
           <div style={{ maxHeight: "180px", overflowY: "auto", display: "flex", flexDirection: "column", gap: "6px" }}>
             {loadingPresets ? (
               <div style={{ fontSize: "12px", color: "var(--text-muted)", padding: "8px 0" }}>Cargando aparatos...</div>
+            ) : filtered.length === 0 ? (
+              <div style={{ fontSize: "12px", color: "var(--text-muted)", padding: "8px 0", textAlign: "center" }}>
+                {hzFilter
+                  ? `Todavía no tenemos aparatos con ${hzFilter}Hz en la base — prueba buscar manualmente.`
+                  : "No se encontró ningún aparato."}
+              </div>
             ) : filtered.slice(0, 30).map((p) => (
               <div
                 key={p.id}
