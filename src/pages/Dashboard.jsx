@@ -325,7 +325,7 @@ export default function Dashboard() {
           {/* Stats */}
           <div style={{ display: "flex", gap: "14px" }}>
             <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
-              <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: "18px", fontWeight: 700, color: "#D4AA00", letterSpacing: "1px", lineHeight: 1 }}>6</div>
+              <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: "18px", fontWeight: 700, color: "#D4AA00", letterSpacing: "1px", lineHeight: 1 }}>7</div>
               <div style={{ fontSize: "9px", color: "#3A4060", letterSpacing: "2px", textTransform: "uppercase" }}>Módulos</div>
             </div>
             <div style={{ width: "1px", background: "#16192A", alignSelf: "stretch" }} />
