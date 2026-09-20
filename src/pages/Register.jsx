@@ -5,14 +5,9 @@ import { doc, setDoc } from "firebase/firestore";
 import { Link, useNavigate } from "react-router-dom";
 import logoImg from "../assets/fullhead-logo.webp";
 
-// Código de acceso exigido para crear cuenta — cámbialo aquí cuando quieras.
-// Entrégalo en el correo automático de confirmación de compra de Hotmart.
-const CODIGO_ACCESO = "FULLHEAD2026";
-
 export default function Register() {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
-  const [codigo, setCodigo] = useState("");
   const [erro, setErro] = useState("");
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -21,12 +16,6 @@ export default function Register() {
   const handleRegister = async (e) => {
     e.preventDefault();
     setErro("");
-
-    if (codigo.trim().toUpperCase() !== CODIGO_ACCESO) {
-      setErro("Código de acceso incorrecto. Revisa el correo de tu compra.");
-      return;
-    }
-
     setLoading(true);
     try {
       const cred = await createUserWithEmailAndPassword(auth, email, senha);
@@ -153,20 +142,6 @@ export default function Register() {
                   )}
                 </button>
               </div>
-            </div>
-
-            <div>
-              <label style={labelStyle}>Código de Acceso</label>
-              <input
-                type="text"
-                placeholder="Código recibido en tu compra"
-                style={{ ...inputStyle, textTransform: "uppercase", letterSpacing: "1px" }}
-                value={codigo}
-                onChange={(e) => setCodigo(e.target.value)}
-                onFocus={(e) => { e.target.style.borderColor = "rgba(212,170,0,0.4)"; }}
-                onBlur={(e) => { e.target.style.borderColor = "#1A1E2E"; }}
-                required
-              />
             </div>
 
             <button
