@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState, useCallback, useRef } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { db } from "../firebase";
+import RadarSonoroTrainer from "../components/RadarSonoroTrainer.jsx";
 
 const STYLES = `
   @keyframes shimmer {
@@ -23,6 +24,7 @@ const STYLES = `
 
 const CATS = {
   "Todos":            { icon: "⚡", color: "#D4A017" },
+  "Radar Sonoro":     { icon: "🎧", color: "#F0C040", bono: true },
   "Warm-Up":          { icon: "🌡️", color: "#1A6FA8" },
   "Headshot":         { icon: "🎯", color: "#C0392B" },
   "Arrastre":         { icon: "🔄", color: "#D4A017" },
@@ -263,7 +265,10 @@ export default function Treinos() {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const [category, setCategory] = useState("Todos");
+  const [category, setCategory] = useState(() => {
+    const params = new URLSearchParams(window.location.search);
+    return params.get("cat") || "Todos";
+  });
   const [level, setLevel] = useState("Todos");
   const [toast, setToast] = useState(false);
 
@@ -320,27 +325,36 @@ export default function Treinos() {
         <div className="cat-scroll" style={{ overflowX:"auto",marginBottom:"10px" }}>
           <div style={{ display:"flex",gap:"6px",width:"max-content",paddingBottom:"2px" }}>
             {Object.entries(CATS).map(([cat,cfg])=>(
-              <button key={cat} onClick={()=>setCategory(cat)} style={{ display:"inline-flex",alignItems:"center",gap:"4px",padding:"6px 13px",borderRadius:"99px",border:`1px solid ${category===cat?cfg.color:"var(--border)"}`,background:category===cat?`${cfg.color}18`:"var(--surface2)",color:category===cat?cfg.color:"var(--text-muted)",fontSize:"11px",fontWeight:700,letterSpacing:"1px",whiteSpace:"nowrap",textTransform:"uppercase",cursor:"pointer",transition:"all 0.2s",boxShadow:category===cat?`0 0 10px ${cfg.color}22`:"none" }}>
+              <button key={cat} onClick={()=>setCategory(cat)} style={{ position:"relative", display:"inline-flex",alignItems:"center",gap:"4px",padding:"6px 13px",borderRadius:"99px",border:`1px solid ${category===cat?cfg.color:"var(--border)"}`,background:category===cat?`${cfg.color}18`:"var(--surface2)",color:category===cat?cfg.color:"var(--text-muted)",fontSize:"11px",fontWeight:700,letterSpacing:"1px",whiteSpace:"nowrap",textTransform:"uppercase",cursor:"pointer",transition:"all 0.2s",boxShadow:category===cat?`0 0 10px ${cfg.color}22`:"none" }}>
                 <span>{cfg.icon}</span>{cat}
+                {cfg.bono && (
+                  <span style={{ marginLeft:"2px", fontSize:"7px", fontWeight:800, letterSpacing:"0.5px", padding:"2px 5px", borderRadius:"99px", background:"rgba(240,192,64,0.2)", color:"#F0C040" }}>BONO</span>
+                )}
               </button>
             ))}
           </div>
         </div>
 
         {/* Filtro nível */}
-        <div style={{ display:"flex",gap:"6px",marginBottom:"16px",alignItems:"center",flexWrap:"wrap" }}>
-          {["Todos","Iniciante","Intermediário","Avançado"].map(l=>{
-            const cfg = l==="Todos" ? null : getLevelCfg(l);
-            const active = level===l;
-            return (
-              <button key={l} onClick={()=>setLevel(l)} style={{ padding:"5px 12px",borderRadius:"99px",border:`1px solid ${active?(cfg?.color||"var(--gold)"):"var(--border)"}`,background:active?`${cfg?.color||"#D4A017"}14`:"transparent",color:active?(cfg?.color||"var(--gold)"):"var(--text-muted)",fontSize:"10px",fontWeight:700,letterSpacing:"1px",textTransform:"uppercase",cursor:"pointer",transition:"all 0.2s" }}>{l}</button>
-            );
-          })}
-          <span style={{ fontSize:"11px",color:"var(--text-muted)",marginLeft:"4px" }}>
-            {loading?"...":`${filtered.length} rutina${filtered.length!==1?"s":""}`}
-          </span>
-        </div>
+        {category !== "Radar Sonoro" && (
+          <div style={{ display:"flex",gap:"6px",marginBottom:"16px",alignItems:"center",flexWrap:"wrap" }}>
+            {["Todos","Iniciante","Intermediário","Avançado"].map(l=>{
+              const cfg = l==="Todos" ? null : getLevelCfg(l);
+              const active = level===l;
+              return (
+                <button key={l} onClick={()=>setLevel(l)} style={{ padding:"5px 12px",borderRadius:"99px",border:`1px solid ${active?(cfg?.color||"var(--gold)"):"var(--border)"}`,background:active?`${cfg?.color||"#D4A017"}14`:"transparent",color:active?(cfg?.color||"var(--gold)"):"var(--text-muted)",fontSize:"10px",fontWeight:700,letterSpacing:"1px",textTransform:"uppercase",cursor:"pointer",transition:"all 0.2s" }}>{l}</button>
+              );
+            })}
+            <span style={{ fontSize:"11px",color:"var(--text-muted)",marginLeft:"4px" }}>
+              {loading?"...":`${filtered.length} rutina${filtered.length!==1?"s":""}`}
+            </span>
+          </div>
+        )}
 
+        {category === "Radar Sonoro" ? (
+          <RadarSonoroTrainer />
+        ) : (
+        <>
         {error && <div style={{ marginBottom:"14px",padding:"12px 16px",background:"rgba(192,57,43,0.1)",border:"1px solid rgba(192,57,43,0.4)",borderRadius:"8px",fontSize:"12px",color:"#e57373" }}>{error}</div>}
 
         {loading ? (
@@ -364,6 +378,8 @@ export default function Treinos() {
             <span style={{ color:"var(--gold)",fontWeight:800 }}>💡 Rutina recomendada:</span>{" "}
             Warm-Up (5 min) → Arrastre/Headshot (10 min) → Capa (5 min) → Ranked. Hazlo todos los días por 2 semanas.
           </div>
+        )}
+        </>
         )}
       </div>
     </div>

@@ -344,6 +344,21 @@ export default function Configs() {
           Gráficos, FPS y botones calibrados para tu celular. Aplica todo junto con tu sensibilidad FullHead para el máximo rendimiento.
         </div>
 
+        {/* Config Pro para HS */}
+        <div style={{
+          background: "rgba(192,57,43,0.06)",
+          border: "1px solid rgba(192,57,43,0.25)",
+          borderRadius: "8px",
+          padding: "12px 16px",
+          marginBottom: "20px",
+          fontSize: "12px",
+          color: "var(--text-muted)",
+          lineHeight: 1.6,
+        }}>
+          <span style={{ color: "#E57373", fontWeight: 700 }}>🎯 Configuraciones Pro para HS:</span>{" "}
+          El tamaño y posición del botón de disparo abajo, combinados con tu Mira 2x/4x en la Sensibilidad, son lo que más impacta tus headshots. Ajusta ambos juntos, no solo uno.
+        </div>
+
         {/* Filtros */}
         <div style={{ display: "flex", gap: "8px", marginBottom: "10px", flexWrap: "wrap" }}>
           <select

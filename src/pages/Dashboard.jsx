@@ -257,6 +257,38 @@ export default function Dashboard() {
           </div>
         )}
 
+        {/* BONO EXCLUSIVO — RADAR SONORO */}
+        <Link
+          to="/treinos?cat=Radar%20Sonoro"
+          style={{
+            display: "flex", alignItems: "center", gap: "12px",
+            padding: "14px 16px", borderRadius: "12px", textDecoration: "none",
+            background: "linear-gradient(135deg, rgba(240,192,64,0.1), rgba(10,10,10,0.3))",
+            border: "1px solid rgba(240,192,64,0.3)",
+            animation: "cardIn 0.3s ease both",
+          }}
+        >
+          <div style={{
+            width: "38px", height: "38px", borderRadius: "10px", flexShrink: 0,
+            background: "rgba(240,192,64,0.14)", border: "1px solid rgba(240,192,64,0.35)",
+            display: "flex", alignItems: "center", justifyContent: "center", fontSize: "18px",
+          }}>🎧</div>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "7px", marginBottom: "2px" }}>
+              <span style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: "13px", fontWeight: 700, letterSpacing: "1px", color: "#F0C040", textTransform: "uppercase" }}>
+                Radar Sonoro
+              </span>
+              <span style={{ fontSize: "7px", fontWeight: 800, letterSpacing: "0.5px", padding: "2px 6px", borderRadius: "99px", background: "rgba(240,192,64,0.2)", color: "#F0C040" }}>BONO EXCLUSIVO</span>
+            </div>
+            <div style={{ fontSize: "11px", color: "#8A93B8" }}>
+              Entrena tu oído para detectar enemigos por dirección de sonido.
+            </div>
+          </div>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#F0C040" strokeWidth="2" style={{ flexShrink: 0 }}>
+            <polyline points="9 18 15 12 9 6"/>
+          </svg>
+        </Link>
+
         {/* ACTIVAR NOTIFICACIONES */}
         {notifStatus === "default" && (
           <div style={{
