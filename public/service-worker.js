@@ -61,6 +61,14 @@ self.addEventListener('fetch', (event) => {
   if (request.method !== 'GET') {
     return;
   }
+
+  // Centro de Conexión: o teste de velocidade não pode passar pelo cache
+  // (falsearia a medição e encheria o armazenamento com o arquivo de teste)
+  try {
+    if (new URL(request.url).hostname === 'speed.cloudflare.com') {
+      return;
+    }
+  } catch (e) { /* URL inválida: segue o fluxo normal */ }
   
   // For API requests - network first
   if (request.url.includes('/api/') || request.url.includes('firestore')) {

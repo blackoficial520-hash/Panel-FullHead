@@ -7,8 +7,8 @@ const STEPS = [
   { pct: 42,  txt: 'CARGANDO MÓDULOS...' },
   { pct: 55,  txt: 'SINCRONIZANDO DATOS...' },
   { pct: 67,  txt: 'SINCRONIZANDO DATOS...' },
-  { pct: 78,  txt: 'CONFIGURANDO PANEL...' },
-  { pct: 88,  txt: 'CONFIGURANDO PANEL...' },
+  { pct: 78,  txt: 'CONFIGURANDO SISTEMA...' },
+  { pct: 88,  txt: 'CONFIGURANDO SISTEMA...' },
   { pct: 94,  txt: 'CASI LISTO...' },
   { pct: 100, txt: '¡BIENVENIDO!' },
 ];
@@ -214,7 +214,7 @@ export default function SplashScreen({ onComplete }) {
 
         {/* Nome */}
         <div id="fh-name">FULLHEAD</div>
-        <div id="fh-sub">PANEL · FREE FIRE</div>
+        <div id="fh-sub">CALIBRACIÓN · FREE FIRE</div>
 
         {/* Barra de progresso */}
         <div id="fh-bar-wrap">

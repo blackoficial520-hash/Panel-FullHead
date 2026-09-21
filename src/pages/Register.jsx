@@ -77,7 +77,7 @@ export default function Register() {
               FULLHEAD
             </div>
             <div style={{ fontSize: "9px", letterSpacing: "5px", color: "#4A5578", fontWeight: 500 }}>
-              PANEL · FREE FIRE
+              CALIBRACIÓN · FREE FIRE
             </div>
           </div>
 

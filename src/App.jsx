@@ -12,6 +12,7 @@ import Configs from "./pages/Configs.jsx";
 import Treinos from "./pages/Treinos.jsx";
 import CalibradorLive from "./pages/CalibradorLive.jsx";
 import GeneradorNicks from "./pages/GeneradorNicks.jsx";
+import CentroConexion from "./pages/CentroConexion.jsx";
 import Instalacion from "./pages/Instalacion.jsx";
 import AppLayout from "./components/AppLayout.jsx";
 import { inicializarNotificaciones } from "./utils/notifications.js";
@@ -127,7 +128,7 @@ export default function App() {
   return (
     <PWAController>
       <Routes>
-        <Route path="/login" element={<Login />} /><Route path="/login" element={<Login />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/registro" element={<Register />} />
         <Route path="/esqueci-senha" element={<ForgotPassword />} />
         <Route path="/tutorial" element={<Tutorial />} />
@@ -158,6 +159,10 @@ export default function App() {
         <Route
           path="/nicks"
           element={<ProtectedRoute><GeneradorNicks /></ProtectedRoute>}
+        />
+        <Route
+          path="/conexion"
+          element={<ProtectedRoute><CentroConexion /></ProtectedRoute>}
         />
         <Route
           path="/"

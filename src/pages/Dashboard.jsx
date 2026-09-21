@@ -4,28 +4,15 @@ import { collection, getDocs } from "firebase/firestore";
 import { db, auth, messaging } from "../firebase";
 import { inicializarNotificaciones } from "../utils/notifications.js";
 
-const UPDATE_NOTICE_KEY = "fh_update_seen_v3_firmapro";
+const UPDATE_NOTICE_KEY = "fh_update_seen_v4_conexion";
 
 const modules = [
   {
-    title: "Cómo Usar el Panel",
-    desc: "Guía rápida de todos los módulos de FullHead.",
-    route: "/instalacion",
-    accent: "#D4AA00",
-    badge: null,
-    num: "01",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="#D4AA00" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-      </svg>
-    ),
-  },
-  {
     title: "Sensibilidad por Celular",
-    desc: "Presets VIP por modelo de dispositivo.",
+    desc: "Presets PRO por modelo de dispositivo.",
     route: "/sensi",
     accent: "#3B82F6",
-    badge: { text: "NUEVO", bg: "rgba(16,185,129,0.12)", color: "#22C97A", border: "rgba(16,185,129,0.2)" },
+    badge: { text: "PRO", bg: "rgba(212,170,0,0.1)", color: "#D4AA00", border: "rgba(212,170,0,0.2)" },
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="#3B82F6" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/>
@@ -83,6 +70,18 @@ const modules = [
     ),
   },
   {
+    title: "Centro de Conexión",
+    desc: "Mide tu red, sigue la guía de optimización y configura un DNS estable.",
+    route: "/conexion",
+    accent: "#38BDF8",
+    badge: { text: "NUEVO", bg: "rgba(16,185,129,0.12)", color: "#22C97A", border: "rgba(16,185,129,0.2)" },
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="#38BDF8" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/>
+      </svg>
+    ),
+  },
+  {
     title: "Firma PRO · genera tu nick con estilo",
     desc: "Crea tu firma estilo pro-player con símbolos y fuentes especiales.",
     route: "/nicks",
@@ -96,6 +95,12 @@ const modules = [
   },
 ];
 
+const MODULE_GROUPS = [
+  { title: "Calibra tu celular", routes: ["/sensi", "/hud", "/configs", "/calibrador"] },
+  { title: "Entrena y prepárate", routes: ["/treinos", "/conexion"] },
+  { title: "Extras", routes: ["/nicks"], fullWidth: true },
+];
+
 function hexToRgba(hex, alpha) {
   const h = hex.replace("#", "");
   const r = parseInt(h.substring(0, 2), 16);
@@ -104,7 +109,7 @@ function hexToRgba(hex, alpha) {
   return `rgba(${r}, ${g}, ${b}, ${alpha})`;
 }
 
-function ModCard({ mod, idx }) {
+function ModCard({ mod, idx, fullWidth }) {
   const accent = mod.accent;
   const iconBg = hexToRgba(accent, 0.10);
   const iconBorder = hexToRgba(accent, 0.15);
@@ -115,7 +120,7 @@ function ModCard({ mod, idx }) {
   return (
     <Link
       to={mod.route}
-      className="card-enter"
+      className={fullWidth ? "card-enter prem-card-fh" : "card-enter"}
       style={{
         background: "#0C0E18",
         border: "1px solid #16192A",
@@ -236,10 +241,10 @@ export default function Dashboard() {
             </div>
             <div style={{ flex: 1, minWidth: 0 }}>
               <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: "13px", fontWeight: 700, letterSpacing: "1.5px", color: "#E8DDB0", textTransform: "uppercase", marginBottom: "4px" }}>
-                ¡Panel actualizado!
+                ¡Nueva actualización!
               </div>
               <div style={{ fontSize: "11.5px", color: "#8A93B8", lineHeight: 1.6 }}>
-                Llegó la <strong style={{ color: "#C8D4F0" }}>Firma PRO</strong> con más de 80 estilos y símbolos, y el nuevo <strong style={{ color: "#C8D4F0" }}>Detector de Pantalla en Vivo</strong> dentro del Calibrador — mide la tasa de refresco real de tu celular en un toque. Seguimos trabajando — pronto llegan más actualizaciones al panel.
+                Llegó el <strong style={{ color: "#C8D4F0" }}>Centro de Conexión</strong>: mide la calidad de tu red antes de jugar, sigue la guía de optimización y configura un DNS estable. Todo desde tu navegador, sin instalar nada. Seguimos trabajando — pronto llegan más novedades.
               </div>
             </div>
             <button
@@ -312,7 +317,7 @@ export default function Dashboard() {
                 Activa las notificaciones
               </div>
               <div style={{ fontSize: "11px", color: "#4A5578" }}>
-                Entérate cuando haya novedades en el panel.
+                Entérate cuando haya novedades en FullHead.
               </div>
             </div>
             <button
@@ -348,7 +353,7 @@ export default function Dashboard() {
             MÓDULOS DISPONIBLES
           </div>
           <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: "28px", fontWeight: 700, letterSpacing: "2px", color: "#E8DDB0", lineHeight: 1, marginBottom: "5px", textTransform: "uppercase" }}>
-            PANEL <span style={{ color: "#D4AA00" }}>FULLHEAD</span>
+            SISTEMA <span style={{ color: "#D4AA00" }}>FULLHEAD</span>
           </div>
           <div style={{ fontSize: "12px", color: "#4A5578", marginBottom: "14px" }}>
             Selecciona un módulo para optimizar tu rendimiento al máximo
@@ -357,7 +362,7 @@ export default function Dashboard() {
           {/* Stats */}
           <div style={{ display: "flex", gap: "14px" }}>
             <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
-              <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: "18px", fontWeight: 700, color: "#D4AA00", letterSpacing: "1px", lineHeight: 1 }}>7</div>
+              <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: "18px", fontWeight: 700, color: "#D4AA00", letterSpacing: "1px", lineHeight: 1 }}>{modules.length}</div>
               <div style={{ fontSize: "9px", color: "#3A4060", letterSpacing: "2px", textTransform: "uppercase" }}>Módulos</div>
             </div>
             <div style={{ width: "1px", background: "#16192A", alignSelf: "stretch" }} />
@@ -373,18 +378,51 @@ export default function Dashboard() {
           </div>
         </section>
 
-        {/* SECTION LABEL */}
-        <div style={{ fontSize: "9px", fontWeight: 600, letterSpacing: "4px", color: "#2A3050", textTransform: "uppercase", display: "flex", alignItems: "center", gap: "10px" }}>
-          Módulos
-          <span style={{ flex: 1, height: "1px", background: "#10131C" }} />
-        </div>
+        {/* GUÍA RÁPIDA */}
+        <Link
+          to="/instalacion"
+          style={{
+            display: "flex", alignItems: "center", gap: "12px",
+            padding: "12px 14px", borderRadius: "12px", textDecoration: "none",
+            background: "#0C0E18", border: "1px solid #16192A",
+          }}
+        >
+          <div style={{ width: "32px", height: "32px", borderRadius: "9px", flexShrink: 0, background: "rgba(212,170,0,0.1)", border: "1px solid rgba(212,170,0,0.15)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#D4AA00" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+            </svg>
+          </div>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: "13px", fontWeight: 700, letterSpacing: "1.5px", color: "#C8D4F0", textTransform: "uppercase" }}>
+              ¿Primera vez? Mira la guía rápida
+            </div>
+            <div style={{ fontSize: "11px", color: "#4A5578" }}>Cómo usar cada módulo, paso a paso.</div>
+          </div>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#D4AA00" strokeWidth="2" style={{ flexShrink: 0 }}>
+            <polyline points="9 18 15 12 9 6"/>
+          </svg>
+        </Link>
 
-        {/* GRID */}
-        <div className="mods-grid-fh">
-          {modules.map((mod, i) => (
-            <ModCard key={mod.title} mod={mod} idx={i} />
-          ))}
-        </div>
+        {/* MÓDULOS AGRUPADOS */}
+        {(() => {
+          let n = 0;
+          return MODULE_GROUPS.map((g) => {
+            const mods = g.routes.map((r) => modules.find((m) => m.route === r)).filter(Boolean);
+            return (
+              <div key={g.title} style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+                <div style={{ fontSize: "9px", fontWeight: 600, letterSpacing: "4px", color: "#2A3050", textTransform: "uppercase", display: "flex", alignItems: "center", gap: "10px" }}>
+                  {g.title}
+                  <span style={{ flex: 1, height: "1px", background: "#10131C" }} />
+                </div>
+                <div className="mods-grid-fh">
+                  {mods.map((mod) => (
+                    <ModCard key={mod.title} mod={mod} idx={n++} fullWidth={g.fullWidth} />
+                  ))}
+                </div>
+              </div>
+            );
+          });
+        })()}
 
         {/* TIP BAR */}
         <div style={{ padding: "10px 14px", borderRadius: "10px", background: "#0C0E18", border: "1px solid #10131C", display: "flex", alignItems: "center", gap: "10px" }}>

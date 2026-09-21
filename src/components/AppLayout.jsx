@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase";
 import logoImg from "../assets/fullhead-logo.webp";
@@ -7,7 +7,7 @@ import "../styles/layout.css";
 
 const nav = [
   {
-    label: "Panel Principal", to: "/",
+    label: "Inicio", to: "/",
     icon: (
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
         <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/>
@@ -24,7 +24,7 @@ const nav = [
     )
   },
   {
-    label: "Sensibilidad", to: "/sensi",
+    label: "Sensibilidad", to: "/sensi", section: "Calibra tu celular",
     icon: (
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
         <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/>
@@ -50,14 +50,6 @@ const nav = [
     )
   },
   {
-    label: "Entrenamientos", to: "/treinos",
-    icon: (
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
-        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
-      </svg>
-    )
-  },
-  {
     label: "Calibrador en Vivo", to: "/calibrador",
     icon: (
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
@@ -66,7 +58,23 @@ const nav = [
     )
   },
   {
-    label: "Firma PRO", to: "/nicks",
+    label: "Entrenamientos", to: "/treinos", section: "Entrena y prepárate",
+    icon: (
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+      </svg>
+    )
+  },
+  {
+    label: "Centro de Conexión", to: "/conexion",
+    icon: (
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/>
+      </svg>
+    )
+  },
+  {
+    label: "Firma PRO", to: "/nicks", section: "Extras",
     icon: (
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
         <path d="M12 2H2v10l9.29 9.29a2.43 2.43 0 0 0 3.42 0l6.58-6.58a2.43 2.43 0 0 0 0-3.42L12 2Z"/><path d="M7 7h.01"/>
@@ -95,7 +103,7 @@ export default function AppLayout({ children }) {
 
   const userName = user?.displayName || user?.email?.split("@")[0] || "Usuario";
   const userInitial = userName.charAt(0).toUpperCase();
-  const isModuleRoute = ["/sensi", "/hud", "/configs", "/treinos", "/instalacion", "/calibrador", "/nicks"].includes(pathname);
+  const isModuleRoute = ["/sensi", "/hud", "/configs", "/treinos", "/instalacion", "/calibrador", "/nicks", "/conexion"].includes(pathname);
 
   if (isModuleRoute) {
     return <>{children}</>;
@@ -144,19 +152,21 @@ export default function AppLayout({ children }) {
             FULLHEAD
           </div>
           <div style={{ fontSize: "8px", letterSpacing: "4px", color: "#3A4060", marginTop: "3px" }}>
-            PANEL · FREE FIRE
+            CALIBRACIÓN · FREE FIRE
           </div>
         </div>
       </div>
 
       {/* Nav */}
       <div style={{ padding: "16px 12px 6px", flex: 1, overflowY: "auto" }}>
-        <div style={{ fontSize: "9px", letterSpacing: "3px", color: "var(--text-faint)", textTransform: "uppercase", padding: "0 8px", marginBottom: "8px", fontWeight: 600 }}>
-          Navegación
-        </div>
-        {nav.map((item) => {
+        {nav.map((item, i) => {
           const active = pathname === item.to;
-          return item.disabled ? (
+          const sectionLabel = item.section ? (
+            <div key={"sec-" + item.section} style={{ fontSize: "9px", letterSpacing: "2.5px", color: "var(--text-faint)", textTransform: "uppercase", padding: i === 0 ? "0 8px" : "14px 8px 0", marginBottom: "6px", fontWeight: 600 }}>
+              {item.section}
+            </div>
+          ) : null;
+          const row = item.disabled ? (
             <div key={item.to} style={getNavItemStyle(item)}>
               <span style={{ width: 16, height: 16, flexShrink: 0, display: "inline-flex" }}>{item.icon}</span>
               <span>{item.label}</span>
@@ -185,6 +195,12 @@ export default function AppLayout({ children }) {
               <span style={{ width: 16, height: 16, flexShrink: 0, display: "inline-flex" }}>{item.icon}</span>
               <span>{item.label}</span>
             </Link>
+          );
+          return (
+            <Fragment key={item.to}>
+              {sectionLabel}
+              {row}
+            </Fragment>
           );
         })}
       </div>

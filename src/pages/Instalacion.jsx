@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const guideSteps = [
+const RAW_STEPS = [
   {
+    group: "Calibra tu celular",
     num: "01",
     title: "Sensibilidad por Celular",
     desc: "Es el corazón del sistema. Busca tu marca y modelo en el buscador, o filtra por marca en el menú desplegable. Cada tarjeta muestra los valores calibrados (General, Red Dot, Mira 2x, Mira 4x, AWM y Mirada Libre) según el DPI real de tu pantalla.",
@@ -15,6 +16,20 @@ const guideSteps = [
     tip: "Toca \"COPIAR SENSI\" en la tarjeta de tu celular, abre Free Fire → Configuración → Sensibilidad y pega cada valor en su casilla correspondiente.",
   },
   {
+    group: "Calibra tu celular",
+    num: "05",
+    title: "Perfiles Geral y Pro",
+    desc: "Cada celular tiene un perfil \"Geral\" (equilibrado, para el día a día) y algunos también un perfil \"Pro\" (más cerrado, para quien ya domina la sensibilidad base). El badge de color (60Hz BASE, 90Hz MED, 120Hz PRO, 144Hz ELITE) te muestra la gama de tu pantalla de un vistazo.",
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+        <circle cx="12" cy="8" r="4"/>
+        <path d="M4 21v-1a8 8 0 0 1 16 0v1"/>
+      </svg>
+    ),
+    tip: "Activa \"🔥 Solo Populares\" en la Sensibilidad para ver primero los modelos más usados por la comunidad LATAM.",
+  },
+  {
+    group: "Calibra tu celular",
     num: "02",
     title: "HUD Pro",
     desc: "Aquí encuentras el tamaño y la posición ideal de cada botón (disparo, mira, agachar, saltar, pared gloo) para tu modelo exacto. Usa el filtro \"2 Dedos\" o \"3 Dedos\" según cómo juegas.",
@@ -29,6 +44,7 @@ const guideSteps = [
     tip: "Si tu celular aguanta \"3 Dedos\", pruébalo en modo entrenamiento primero — libera el pulgar derecho para disparar y mirar al mismo tiempo.",
   },
   {
+    group: "Calibra tu celular",
     num: "03",
     title: "Configuraciones Pro",
     desc: "Ajustes de gráficos, FPS, sombra y filtros optimizados para tu hardware — más el tamaño ideal de los botones de disparo y mira en porcentaje de pantalla. Todo calibrado para que tu celular no trabe en partidas largas.",
@@ -43,6 +59,19 @@ const guideSteps = [
     tip: "Toca \"COPIAR CONFIG\" y aplica cada ajuste en Free Fire → Configuración → Gráficos, en el mismo orden que aparece en la tarjeta.",
   },
   {
+    group: "Calibra tu celular",
+    num: "06",
+    title: "Calibrador en Vivo",
+    desc: "Detecta la tasa de refresco real de tu pantalla en un toque, elige un aparato base, mueve los sliders de sensibilidad a tu gusto, prueba el efecto en la vista previa y guarda tu propio perfil personalizado — queda guardado en tu cuenta para siempre.",
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+        <circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/>
+      </svg>
+    ),
+    tip: "Guarda varios perfiles con nombres claros (ej: \"Rankeada\", \"AWM Sniper\") y cámbialos según el modo que estés jugando.",
+  },
+  {
+    group: "Entrena y prepárate",
     num: "04",
     title: "Entrenamientos Diarios",
     desc: "Rutinas cortas organizadas por categoría — Headshot, Arrastre, Capa, Crouch-Shot, AWM, Rush, Memoria Muscular y más — para mejorar tu puntería y reflejos con la práctica diaria, no solo con la configuración.",
@@ -56,29 +85,19 @@ const guideSteps = [
     tip: "10 a 15 minutos por día en modo entrenamiento rinden más que una hora sin rutina. Elige una categoría a la vez.",
   },
   {
-    num: "05",
-    title: "Perfiles Geral y Pro",
-    desc: "Cada celular tiene un perfil \"Geral\" (equilibrado, para el día a día) y algunos también un perfil \"Pro\" (más cerrado, para quien ya domina la sensibilidad base). El badge de color (60Hz BASE, 90Hz MED, 120Hz PRO, 144Hz ELITE) te muestra la gama de tu pantalla de un vistazo.",
+    group: "Entrena y prepárate",
+    num: "00",
+    title: "Centro de Conexión",
+    desc: "Prepara tu partida antes de abrir el juego. Tiene tres pestañas: el Medidor (estima latencia, estabilidad, pérdida de paquetes y descarga de tu red), la Guía de Optimización (un checklist de ajustes manuales para tu celular) y DNS (servidores recomendados para copiar y pegar en tus ajustes de red).",
     icon: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-        <circle cx="12" cy="8" r="4"/>
-        <path d="M4 21v-1a8 8 0 0 1 16 0v1"/>
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/>
       </svg>
     ),
-    tip: "Activa \"🔥 Solo Populares\" en la Sensibilidad para ver primero los modelos más usados por la comunidad LATAM.",
+    tip: "Haz el test del Medidor antes de una partida importante. Si sale \"inestable\", cambia entre Wi-Fi y datos móviles y compara.",
   },
   {
-    num: "06",
-    title: "Calibrador en Vivo",
-    desc: "Detecta la tasa de refresco real de tu pantalla en un toque, elige un aparato base, mueve los sliders de sensibilidad a tu gusto, prueba el efecto en la vista previa y guarda tu propio perfil personalizado — queda guardado en tu cuenta para siempre.",
-    icon: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-        <circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/>
-      </svg>
-    ),
-    tip: "Guarda varios perfiles con nombres claros (ej: \"Rankeada\", \"AWM Sniper\") y cámbialos según el modo que estés jugando.",
-  },
-  {
+    group: "Extras",
     num: "07",
     title: "Firma PRO",
     desc: "Crea tu firma estilo pro-player con más de 80 combinaciones — símbolos gamer, armas ASCII, emoticonos, fuentes especiales y tags de clan. Escribe tu nombre una vez y explora todas las categorías.",
@@ -91,10 +110,25 @@ const guideSteps = [
   },
 ];
 
+// Numeración automática según el orden final
+const guideSteps = RAW_STEPS.map((st, i) => ({ ...st, num: String(i + 1).padStart(2, "0") }));
+
 const faq = [
   {
+    q: "¿Tengo que descargar un APK o instalar algo raro?",
+    a: "No. FullHead funciona desde tu navegador y puedes agregarlo a tu pantalla de inicio como si fuera una app, sin descargas pesadas. No modifica archivos del juego ni instala nada extra: tú aplicas los valores directamente en los ajustes oficiales de Free Fire. Lo único que te puede pedir es permiso de notificaciones, y es opcional.",
+  },
+  {
+    q: "¿El Medidor de Conexión me dice mi ping real en Free Fire?",
+    a: "No. Mide la calidad de tu red hacia un servidor de prueba (latencia, estabilidad, pérdida de paquetes y descarga) y con eso estima si tu conexión está lista. El ping exacto dentro de la partida depende de los servidores del juego. Úsalo para comparar Wi-Fi contra datos móviles y detectar problemas antes de jugar.",
+  },
+  {
+    q: "¿Cambiar el DNS baja mi ping?",
+    a: "No dentro de la partida. El DNS ayuda a que la conexión inicial (iniciar sesión, entrar a la sala) resuelva más rápido y, en algunas redes, más estable. Es un ajuste normal del sistema: si no notas mejora, vuelve a \"Automático\" cuando quieras.",
+  },
+  {
     q: "¿No encuentro mi modelo exacto?",
-    a: "Seguimos agregando aparelhos cada semana según lo que la comunidad reporta. Mientras tanto, busca el modelo más cercano de tu misma marca y gama (mismo Hz y tamaño de pantalla) — el resultado será muy similar.",
+    a: "Seguimos agregando celulares según lo que la comunidad reporta. Mientras tanto, busca el modelo más cercano de tu misma marca y gama (mismo Hz y tamaño de pantalla) — el resultado será muy similar.",
   },
   {
     q: "¿Cuál es la diferencia entre perfil \"Geral\" y \"Pro\"?",
@@ -113,7 +147,7 @@ const faq = [
     a: "Es tu propio laboratorio de sensibilidad: partes de un aparato base, ajustas cada valor con sliders en tiempo real, pruebas el efecto en una vista previa y guardas el resultado como un perfil personalizado vinculado a tu cuenta. Puedes crear cuantos perfiles quieras.",
   },
   {
-    q: "¿El panel funciona sin internet?",
+    q: "¿FullHead funciona sin internet?",
     a: "Necesitas conexión para cargar los presets, HUDs, configuraciones y entrenamientos la primera vez. Una vez cargados en la sesión, la navegación entre pantallas es instantánea.",
   },
 ];
@@ -133,7 +167,7 @@ export default function Instalacion() {
           </svg>
         </button>
         <div>
-          <div className="module-title">Cómo Usar el Panel</div>
+          <div className="module-title">Cómo Usar FullHead</div>
           <div className="module-subtitle">Guía rápida de todos los módulos de FullHead</div>
         </div>
       </div>
@@ -162,7 +196,7 @@ export default function Instalacion() {
             Bienvenido a tu Sistema de Calibración
           </div>
           <p style={{ fontSize: "13px", color: "var(--text)", lineHeight: 1.7, maxWidth: "680px" }}>
-            FullHead no es un hack ni un mod — es una <strong style={{ color: "var(--gold)" }}>base de datos de calibración</strong> construida a partir de las características reales de cada celular (densidad de pantalla, tasa de actualización y hardware). Cuatro módulos, un mismo objetivo: que encuentres tu configuración exacta en segundos y la apliques tú mismo, directo en el juego.
+            FullHead no es un hack ni un mod — es una <strong style={{ color: "var(--gold)" }}>base de datos de calibración</strong> construida a partir de las características reales de cada celular (densidad de pantalla, tasa de actualización y hardware). Siete módulos, un mismo objetivo: que encuentres tu configuración exacta en segundos y la apliques tú mismo, directo en el juego.
           </p>
           <div style={{ display: "flex", flexWrap: "wrap", gap: "10px", marginTop: "14px" }}>
             {[
@@ -171,6 +205,7 @@ export default function Instalacion() {
               { icon: "⚙️", text: "Gráficos optimizados" },
               { icon: "🏆", text: "Entrenamientos diarios" },
               { icon: "🎚️", text: "Calibrador personalizado" },
+              { icon: "📡", text: "Centro de Conexión" },
               { icon: "✍️", text: "Firma PRO" },
             ].map((b) => (
               <div key={b.text} style={{
@@ -191,14 +226,20 @@ export default function Instalacion() {
 
         {/* Steps */}
         <div className="section-header-fh">
-          <div className="section-label-fh">■&nbsp; Los 7 módulos del panel</div>
+          <div className="section-label-fh">■&nbsp; Guía por módulo</div>
           <div className="section-line-fh"/>
         </div>
 
         <div style={{ display: "flex", flexDirection: "column", gap: "14px", marginBottom: "40px" }}>
           {guideSteps.map((step, idx) => (
+            <Fragment key={step.num}>
+            {(idx === 0 || guideSteps[idx - 1].group !== step.group) && (
+              <div style={{ fontSize: "9px", fontWeight: 600, letterSpacing: "3px", color: "#3A4468", textTransform: "uppercase", display: "flex", alignItems: "center", gap: "10px", margin: idx === 0 ? "0" : "14px 0 0" }}>
+                {step.group}
+                <span style={{ flex: 1, height: "1px", background: "#10131C" }} />
+              </div>
+            )}
             <div
-              key={step.num}
               className="data-card"
               style={{
                 padding: "20px 22px",
@@ -218,7 +259,7 @@ export default function Instalacion() {
                   }}>
                     {step.num}
                   </div>
-                  {idx < guideSteps.length - 1 && (
+                  {idx < guideSteps.length - 1 && guideSteps[idx + 1].group === step.group && (
                     <div style={{ width: "1px", height: "24px", background: "var(--border)" }} />
                   )}
                 </div>
@@ -271,6 +312,7 @@ export default function Instalacion() {
                 </div>
               </div>
             </div>
+            </Fragment>
           ))}
         </div>
 
@@ -300,7 +342,7 @@ export default function Instalacion() {
               ¡Ya conoces todo el sistema!
             </div>
             <div style={{ fontSize: "12px", color: "var(--text-muted)", lineHeight: 1.6 }}>
-              Empieza por Sensibilidad y HUD — son los dos módulos que más rápido notarás en tu partida. Ajusta de a poco: 2 a 3 puntos por vez, nunca todo de golpe.
+              Empieza por Sensibilidad y HUD — son los dos módulos que más rápido notarás en tu partida. Ajusta de a poco: 2 a 3 puntos por vez, nunca todo de golpe. Y antes de abrir el juego, pasa por el Centro de Conexión para revisar tu red.
             </div>
           </div>
         </div>
