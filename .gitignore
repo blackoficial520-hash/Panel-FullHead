@@ -30,3 +30,8 @@ dist-ssr
 .env
 .env.local
 .env.*.local
+
+# Resíduos que não devem voltar ao repositório
+zipFile.zip
+attached_assets/
+*.zip
